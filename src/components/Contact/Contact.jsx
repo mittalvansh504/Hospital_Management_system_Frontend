@@ -1,46 +1,57 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import './contact.css';
-
+import "./contact.css";
 
 const Contact = () => {
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [queryArea, setQueryArea] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phoneNo, setPhoneNo] = React.useState("");
-  const [queryArea, setQueryArea] = React.useState("");
-
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const response = fetch("http://localhost:8181/Contact/send", {
+    try {
+      const response = await fetch("http://localhost:8181/Contact/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phoneNo,
+          queryArea
+        })
+      });
 
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phoneNo,
-        queryArea
-      })
-    })
-    const result = response.text();
-    if(!response.ok){
-      alert(result);
-    }
-    else{
-      alert("Query Submitted Successfully");
+      const result = await response.text();
+
+      if (!response.ok) {
+        alert(result);
+      } else {
+        alert("Query submitted successfully");
+
+        // clear form
+        setName("");
+        setEmail("");
+        setPhoneNo("");
+        setQueryArea("");
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-
-    
   return (
     <div className="contact">
+
       {/* Header */}
       <div className="upper-container">
         <div className="upper-container-left">
@@ -55,73 +66,61 @@ const Contact = () => {
         </div>
       </div>
 
+      {/* Contact Form */}
+      <div className="middle">
+        <h1>Contact Us</h1>
 
-        <div className="middle">
-            <h1>Contact us</h1>
-            <div className="form-data">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="name">Name</label>
-                    <input type="text"
-                     id="name" 
-                     name="name"
-                     onChange={(e) => 
-                      setName(e.target.value)}
-                    required/>
+        <div className="form-data">
+          <form onSubmit={handleSubmit}>
 
-                    <label htmlFor="email">Email</label>
-                    <input type="email" 
-                      id="email"
-                      name="email" 
-                      onChange={(e)=>
-                      setEmail(e.target.value)}
-                    required/>
+            <label>Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
 
-                    <label htmlFor="phoneNo">Phone No</label>
-                    <input type="tel" 
-                      id="phoneNo" 
-                      name="phoneNo" 
-                      onChange={(e) =>
-                      setPhoneNo(e.target.value)}
-                    required/>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-                    <label htmlFor="queryArea">Query</label>
-                    <input className="query" 
-                      type="text" 
-                      id="queryArea" 
-                      name="queryArea" 
-                      onChange={(e) =>
-                      setQueryArea(e.target.value)}
-                    required/>
+            <label>Phone No</label>
+            <input
+              type="tel"
+              value={phoneNo}
+              onChange={(e) => setPhoneNo(e.target.value)}
+              required
+            />
 
-                    <button className="submit">
-                        Submit
-                    </button>
-                </form>
-            </div>
+            <label>Query</label>
+            <input
+              type="text"
+              value={queryArea}
+              onChange={(e) => setQueryArea(e.target.value)}
+              required
+            />
+
+            <button className="submit" disabled={loading}>
+              {loading ? "Submitting..." : "Submit"}
+            </button>
+
+          </form>
         </div>
+      </div>
 
       {/* Footer */}
       <div className="end-container">
         <footer className="footer">
-          <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-          </div>
-
-          <div className="footer-links">
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/login">Login</Link>
-          </div>
-
-          <hr className="footer-divider" />
-
-          <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-          </p>
+          <h2>HealthCare</h2>
+          <p>Your health, our priority.</p>
         </footer>
       </div>
+
     </div>
   );
 };
