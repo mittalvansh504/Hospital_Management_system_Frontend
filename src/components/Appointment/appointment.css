@@ -1,0 +1,164 @@
+/* =======================
+   Page Container
+======================= */
+.appointment {
+    padding: 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =======================
+   Header
+======================= */
+.upper-container {
+    background-color: rgb(95, 207, 95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.upper-container-left h1 {
+    color: white;
+    font-size: 30px;
+    margin: 0;
+    padding: 15px 0;
+}
+
+.upper-container-right {
+    display: flex;
+    gap: 20px;
+}
+
+.upper-container-right a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.upper-container-right a:hover {
+    color: #98bff1;
+}
+
+
+
+
+/* =======================
+   Form Section
+======================= */
+.appointment-content {
+    flex: 1;
+    padding: 40px 20px;
+
+}
+
+.appointment-content h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #111f42;
+}
+
+
+.appointment-form {
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    gap: 15px;
+}
+
+
+.appointment-form label {
+    font-size: 16px;
+    color: #111f42;
+    font-weight: 600;
+}
+
+.appointment-form input {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.appointment-form select {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.appointment-form button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #d37749;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+/* =======================
+   Footer
+======================= */
+
+.footer {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: #cbd5e1;
+    margin-top: 5px;
+}
+
+.footer-links {
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: #38bdf8;
+}
+
+.footer-divider {
+    border-top: 1px solid #334155;
+    margin: 20px 0;
+}
+
+.footer-copy {
+    font-size: 13px;
+    color: #94a3b8;
+}

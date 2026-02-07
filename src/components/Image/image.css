@@ -1,0 +1,65 @@
+.middle-down {
+  margin-top: 20px;
+  color: #333;
+}
+
+/* Doctor list container */
+.middle-down-doctor-data {
+  
+  display: flex;
+  /* border: 1px solid black; */
+  margin: 400px 400px 20px 400px;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Doctor image container */
+.middle-down-doctor-data-img {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image styling */
+.middle-down-doctor-data-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Doctor info */
+.middle-down-doctor-data-info {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  text-align: center;
+}
+
+/* Text spacing */
+.doctor-data h2 {
+  margin: 5px 0;
+}
+
+.doctor-data p {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+
+
+.appointment-button {
+  margin-top: 10px;
+  margin-left: 700px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
