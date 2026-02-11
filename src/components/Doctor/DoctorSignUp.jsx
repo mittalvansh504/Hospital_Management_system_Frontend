@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./signup.css";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
+import "./doctorsignup.css";
 
 
 const SignUp = () => {
@@ -57,19 +59,7 @@ const SignUp = () => {
   return (
     <div className="signup">
 
-      {/* Header */}
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-
-        <div className="upper-container-right">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/login">Login</Link>
-        </div>
-      </div>
+      <Header />
 
       {/* Form */}
       <div className="form-data">
@@ -205,25 +195,7 @@ const SignUp = () => {
 
       {/* Footer */}
       <div className="end-container">
-        <footer className="footer">
-          <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-          </div>
-
-          <div className="footer-links">
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/login">Login</Link>
-          </div>
-
-          <hr className="footer-divider" />
-
-          <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

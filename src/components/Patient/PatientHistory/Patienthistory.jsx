@@ -1,15 +1,14 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom'
 import Header from '../../Header/Header.jsx'
-import "./doctorhistory.css";
-import Footer from '../../Footer/Footer.jsx';
+import Footer from '../../Footer/Footer.jsx'
+import './patienthistory.css'
 
 
-const Doctorhistory = () => {
+const Patienthistory = () => {
   return (
-    <div className="doctorhistory">
-        {/* Header */}
+    <div className="Patienthistory">
+      {/* Header */}
       <Header />
 
 
@@ -25,8 +24,6 @@ const Doctorhistory = () => {
                         <th>Check Up Date</th>
                         <th>Prescription</th>
                     </tr>
-
-                    
                 </table>
             </div>
         </div>
@@ -39,4 +36,4 @@ const Doctorhistory = () => {
   )
 }
 
-export default Doctorhistory
+export default Patienthistory

@@ -9,39 +9,6 @@
 }
 
 /* =======================
-   Header
-======================= */
-.upper-container {
-    background-color: rgb(95, 207, 95);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.upper-container-left h1 {
-    color: white;
-    font-size: 30px;
-    margin: 0;
-    padding: 15px 0;
-}
-
-.upper-container-right {
-    display: flex;
-    gap: 20px;
-}
-
-.upper-container-right a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-
-.upper-container-right a:hover {
-    color: #98bff1;
-}
-
-/* =======================
    Form Section
 ======================= */
 .form-data {
@@ -110,51 +77,4 @@
 ======================= */
 .end-container {
     background-color: #111f42;
-}
-
-.footer {
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.footer-logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #38bdf8;
-}
-
-.footer-tagline {
-    font-size: 14px;
-    color: #cbd5e1;
-    margin-top: 5px;
-}
-
-.footer-links {
-    margin: 25px 0;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-
-.footer-links a {
-    color: #e2e8f0;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.footer-links a:hover {
-    color: #38bdf8;
-}
-
-.footer-divider {
-    border-top: 1px solid #334155;
-    margin: 20px 0;
-}
-
-.footer-copy {
-    font-size: 13px;
-    color: #94a3b8;
 }

@@ -1,24 +1,14 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom'
 import "./appointment.css";
+import Header from '../Header/Header.jsx'
+import Footer from '../Footer/Footer.jsx'
 
 
 const Appointment = () => {
   return (
     <div className='appointment'>
-      {/* Header */}
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-        <div className="upper-container-right">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/login">Login</Link>
-        </div>
-      </div>
+      <Header />
 
         {/* Appointment Content */}
 
@@ -65,25 +55,7 @@ const Appointment = () => {
 
 
       <div className="end-container">
-        <footer className="footer">
-          <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-          </div>
-
-          <div className="footer-links">
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/login">Login</Link>
-          </div>
-
-          <hr className="footer-divider" />
-
-          <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </div>
     </div>
   )

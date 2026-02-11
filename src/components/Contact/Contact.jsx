@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+
+import Header from "../Header/Header.jsx";
 import "./contact.css";
+import Footer from "../Footer/Footer.jsx";
 
 const Contact = () => {
 
@@ -10,6 +13,7 @@ const Contact = () => {
   const [queryArea, setQueryArea] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,6 +44,7 @@ const Contact = () => {
         setEmail("");
         setPhoneNo("");
         setQueryArea("");
+        navigate("/");
       }
     } catch (error) {
       alert("Server error. Please try again later.");
@@ -52,19 +57,7 @@ const Contact = () => {
   return (
     <div className="contact">
 
-      {/* Header */}
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-
-        <div className="upper-container-right">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
-        </div>
-      </div>
+      <Header />
 
       {/* Contact Form */}
       <div className="middle">
@@ -115,10 +108,7 @@ const Contact = () => {
 
       {/* Footer */}
       <div className="end-container">
-        <footer className="footer">
-          <h2>HealthCare</h2>
-          <p>Your health, our priority.</p>
-        </footer>
+        <Footer />
       </div>
 
     </div>
