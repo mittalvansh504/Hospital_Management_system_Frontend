@@ -1,39 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
 import "./home.css";
 import Image from "../Image/Image.jsx";
 
 const Home = () => {
 
-
   return (
     <div className="home">
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-
-        <div className="upper-container-right">
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/doctorhistory">Doctor History</Link>
-          <div className="hover-container">    
-            <span className="sign-up-span">Sign Up</span>
-              <div className="hidden-links">
-                <Link to="/doctorsignup">Doctor</Link>
-                <Link to="/patientsignup">Patient</Link>
-            </div>
-          </div>     
-          <div className="hover-container">    
-            <span className="login-span">Login</span>
-              <div className="hidden-links">
-                <Link to="/login">Doctor</Link>
-                <Link to="/patientlogin">Patient</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
+      <Header />
       <hr />
 
       <div className="middle-container">
@@ -78,25 +55,8 @@ const Home = () => {
       <hr />
 
       <div className="end-container">
-        <footer className="footer">
-            <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-            </div>
-
-            <div className="footer-links">
-            <a href="About">About Us</a>
-            <a href="Contact">Contact</a>
-            <a href="SignUP">Sign Up</a>
-            <a href="Login">Login</a>
-            </div>
-
-            <hr className="footer-divider" />
-            <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-            </p>
-        </footer>
-        </div>
+        <Footer />  
+      </div>
     </div>
   );
 };

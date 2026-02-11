@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
+import Header from "../Header/Header.jsx";
+import "./doctorlogin.css";
+import Footer from "../Footer/Footer.jsx";
 
 const Login = () => {
 
@@ -12,7 +14,7 @@ const Login = () => {
   const handleLogin = async(e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/health/login", {
+    const response = await fetch("http://localhost:8181/Doctor/loginDoctor", {
 
       method:"POST",
       headers:{
@@ -29,8 +31,13 @@ const Login = () => {
       alert(result);
     }
     else{
+      localStorage.setItem("isLoggedIn", "true"); // MUST be string
+      localStorage.setItem("role", "doctor");     // role-based access
+
       alert("Login Successful");
-      navigate("/");
+
+      // ✅ Redirect to doctor history (protected route)
+      navigate("/doctorhistory");
     }
   }
 
@@ -39,18 +46,7 @@ const Login = () => {
     <div className="login">
 
       {/* Header */}
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-
-        <div className="upper-container-right">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      </div>
+      <Header />
 
       {/* Login Form */}
       <div className="login-data">
@@ -76,25 +72,7 @@ const Login = () => {
 
       {/* Footer */}
       <div className="end-container">
-        <footer className="footer">
-          <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-          </div>
-
-          <div className="footer-links">
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/login">Login</Link>
-          </div>
-
-          <hr className="footer-divider" />
-
-          <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

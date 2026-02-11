@@ -1,21 +1,12 @@
 import React from 'react'
 import './about.css'
-import { Link } from 'react-router-dom'
+import Header from '../Header/Header.jsx'
+import Footer from '../Footer/Footer.jsx'
 
 const About = () => {
   return (
     <div className="about">
-      <div className="upper-container">
-        <div className="upper-container-left">
-          <h1>Welcome to HealthCare</h1>
-        </div>
-        <div className="upper-container-right">
-          <Link to="/">Home</Link>
-          <Link to="/Contact">Contact Us</Link>
-          <Link to="/SignUP">Sign Up</Link>
-          <Link to="/Login">Login</Link>
-        </div>
-      </div>
+      <Header />
 
       <div className="middle-area">
         <h2>About Us</h2>
@@ -80,26 +71,8 @@ const About = () => {
 
 
       <div className="end-container">
-        <footer className="footer">
-            <div className="footer-top">
-            <h1 className="footer-logo">HealthCare</h1>
-            <p className="footer-tagline">Your health, our priority.</p>
-            </div>
-
-            <div className="footer-links">
-            <a href="About">About Us</a>
-            <a href="Contact">Contact</a>
-            <a href="SignUP">Sign Up</a>
-            <a href="Login">Login</a>
-            </div>
-
-            <hr className="footer-divider" />
-
-            <p className="footer-copy">
-            &copy; 2024 HealthCare. All rights reserved.
-            </p>
-        </footer>
-        </div>
+        <Footer />
+      </div>
     </div>
   )
 }
