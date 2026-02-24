@@ -23,7 +23,7 @@ const SignUpPatient = () => {
   const handleSignUp = async(e) =>{
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/Doctor/registration", {
+    const response = await fetch("http://localhost:8181/patient/signup", {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -47,6 +47,9 @@ const SignUpPatient = () => {
     }
     else{
       alert("User Register Successfully");
+
+      localStorage.setItem("isLoggedIn", "true"); // MUST be string
+      localStorage.setItem("role", "patient");     // role-based access
       navigate("/");
     }
   }

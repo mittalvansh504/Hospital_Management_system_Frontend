@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/health/login", {
+    const response = await fetch("http://localhost:8181/patient/loginpatient", {
 
       method:"POST",
       headers:{
@@ -31,8 +31,9 @@ const Login = () => {
     }
     else{
       localStorage.setItem("isLoggedIn", "true"); // MUST be string
-      localStorage.setItem("role", "doctor");     // role-based access
+      localStorage.setItem("role", "patient");     // role-based access
 
+      window.dispatchEvent(new Event("storage"));
       alert("Login Successful");
 
       // ✅ Redirect to doctor history (protected route)

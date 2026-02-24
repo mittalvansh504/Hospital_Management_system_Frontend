@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import "./image.css";
 
 
 const Image = () => {
 
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState(null);
+
+
+   useEffect(() => {
+      const syncAuth = () => {
+        setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+        setRole(localStorage.getItem("role"));
+      };
+  
+      syncAuth();
+      window.addEventListener("storage", syncAuth);
+  
+      return () => window.removeEventListener("storage", syncAuth);
+    }, []);
+
+
+
   const navigate = () => {
-    window.location.href = "/appointment";
+    if (isLoggedIn && role === "patient") {
+      window.location.href = "/appointment";
+    } else {
+      alert("Please Sign Up as a patient to book an appointment.");
+      window.location.href = "/patientsignup";
+    }
   }
 
 
