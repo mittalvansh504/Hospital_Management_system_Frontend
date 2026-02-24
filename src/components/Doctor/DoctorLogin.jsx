@@ -14,19 +14,19 @@ const Login = () => {
   const handleLogin = async(e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/Doctor/loginDoctor", {
+    const response = await fetch("http://localhost:8181/doctor/loginDoctor", {
 
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
-        email,
-        password
+        doctorEmail : email,
+        password : password
       })
     });
 
-    const result = await response.text();
+    const result = await response.json();
     if(!response.ok){
       alert(result);
     }
@@ -34,10 +34,9 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", "true"); // MUST be string
       localStorage.setItem("role", "doctor");     // role-based access
 
+      
       alert("Login Successful");
-
-      // ✅ Redirect to doctor history (protected route)
-      navigate("/doctorhistory");
+      navigate("/");
     }
   }
 

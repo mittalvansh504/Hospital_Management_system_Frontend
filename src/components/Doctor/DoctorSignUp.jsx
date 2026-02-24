@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -7,17 +7,33 @@ import "./doctorsignup.css";
 
 const SignUp = () => {
 
-  const [doctorFirstName, setDoctorFirstName] = useState("");
-  const [doctorLastName, setDoctorLastName] = useState("");
-  const [doctorEmail, setDoctorEmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [doctorDob, setDoctorDob] = useState("");
-  const [degree, setDegree] = useState("");
-  const [department, setDepartment] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [addressLine2, setAddressLine2] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
+  const [doctorName, setDoctorName] = React.useState("");
+  const [doctorEmail, setDoctorEmail] = React.useState("");
+  const [phoneNo, setPhoneNo] = React.useState("");
+  const [doctorDob, setDoctorDob] = React.useState("");
+  const [degree, setDegree] = React.useState("");
+
+  const [departments, setDepartments] = React.useState([]);
+  const [selectedDepartment, setSelectedDepartment] = React.useState("");
+
+  const [addressLine1, setAddressLine1] = React.useState("");
+  const [addressLine2, setAddressLine2] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+
+
+
+    React.useEffect(() => {
+    fetch("http://localhost:8181/departments")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Departments:", data); // 🔥 check this
+        setDepartments(data);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+
 
 
   const navigate = useNavigate();
@@ -26,23 +42,22 @@ const SignUp = () => {
   const handleSignUp = async(e) =>{
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/Doctor/registration", {
+    const response = await fetch("http://localhost:8181/doctor/registration", {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
-        doctorFirstName, 
-        doctorLastName, 
+        doctorName, 
         doctorEmail,
         phoneNo, 
         doctorDob,
         degree,
-        department, 
+        departmentIds: [Number(selectedDepartment)],
         addressLine1,
         addressLine2,
         password,
-        confirmpassword
+        confirmPassword
       })
     });
 
@@ -51,7 +66,11 @@ const SignUp = () => {
       alert(result);
     }
     else{
-      alert("User Register Successfully");
+      localStorage.setItem("isLoggedIn", "true"); // MUST be string
+      localStorage.setItem("role", "doctor");     // role-based access
+
+      
+      alert("Sign Up Successful");
       navigate("/");
     }
   }
@@ -68,27 +87,17 @@ const SignUp = () => {
         <div className="form-input">
           <form onSubmit={handleSignUp}>
             
-            <label htmlFor="doctorFirstName">First Name:</label>
+            <label htmlFor="doctorName">Doctor Name:</label>
             <input type="text" 
-              id="doctorFirstName"
-              name="doctorFirstName"
-              value={doctorFirstName} 
+              id="doctorName"
+              name="doctorName"
+              value={doctorName} 
               onChange={(e) =>
-               setDoctorFirstName(e.target.value)
+               setDoctorName(e.target.value)
               }
               required 
             />
 
-            <label htmlFor="doctorLastName">Last Name:</label>
-            <input type="text"
-              id="doctorLastName"
-              name="doctorLastName" 
-              value={doctorLastName}
-              onChange={(e) => 
-                setDoctorLastName(e.target.value)
-              } 
-              required 
-            />
 
             <label htmlFor="doctorEmail">Email:</label>
             <input type="email" 
@@ -133,15 +142,25 @@ const SignUp = () => {
               required
             />
 
-
             <label htmlFor="department">Department:</label>
-            <input type="text" 
-              id="department" 
-              name="department" 
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-              required
-            />
+              <select
+                  value={selectedDepartment}
+                  onChange={(e) => setSelectedDepartment(e.target.value)}
+                  required
+                >
+                <option value="">Select Department</option>
+                  {Array.isArray(departments) &&
+                    departments.map((dept) => (
+                      <option
+                        key={dept.departmentId}
+                        value={dept.departmentId}
+                        >
+                        {dept.deptName}
+                      </option>
+                    ))}
+                </select>
+
+
 
             <label htmlFor="addressLine1">Address Line 1:</label>
             <input type="text" 
@@ -180,7 +199,7 @@ const SignUp = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              value={confirmpassword}
+              value={confirmPassword}
               onChange={(e) =>
               setConfirmPassword(e.target.value)}
               required

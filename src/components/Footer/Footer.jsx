@@ -22,14 +22,11 @@ const Footer = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/appointment">Appointment</Link>
         </div>
 
         {/* Right Section */}
         <div className="footer-section">
           <h3>Account</h3>
-          <Link to="/login">Doctor Login</Link>
-          <Link to="/patientlogin">Patient Login</Link>
           <Link to="/doctorsignup">Doctor Sign Up</Link>
           <Link to="/patientsignup">Patient Sign Up</Link>
         </div>

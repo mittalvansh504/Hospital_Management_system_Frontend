@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 import "./home.css";
 import Image from "../Image/Image.jsx";
 
 const Home = () => {
+
+  
 
   return (
     <div className="home">

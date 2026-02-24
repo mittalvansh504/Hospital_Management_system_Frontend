@@ -91,7 +91,7 @@ const Contact = () => {
             />
 
             <label>Query</label>
-            <input
+            <textarea className="query"
               type="text"
               value={queryArea}
               onChange={(e) => setQueryArea(e.target.value)}

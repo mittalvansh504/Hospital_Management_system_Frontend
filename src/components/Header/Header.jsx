@@ -7,7 +7,6 @@ const Header = () => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
-  // Sync header with login state
   useEffect(() => {
     const syncAuth = () => {
       setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
@@ -45,15 +44,32 @@ const Header = () => {
           <Link to="/patienthistory">My Treatments</Link>
         )}
 
-        {isLoggedIn ? (
-          <button onClick={handleLogout}>Logout</button>
-        ) : (
+        {!isLoggedIn && (
           <>
-            <Link to="/doctorsignup">Doctor Sign Up</Link>
-            <Link to="/patientsignup">Patient Sign Up</Link>
-            <Link to="/doctorlogin">Doctor Login</Link>
-            <Link to="/patientlogin">Patient Login</Link>
+            {/* Sign Up Dropdown */}
+            <div className="dropdown">
+              <span className="dropbtn">Sign Up ▾</span>
+              <div className="dropdown-content">
+                <Link to="/doctorsignup">Doctor SignUp</Link>
+                <Link to="/patientsignup">Patient SignUp</Link>
+              </div>
+            </div>
+
+            {/* Login Dropdown */}
+            <div className="dropdown">
+              <span className="dropbtn">Login ▾</span>
+              <div className="dropdown-content">
+                <Link to="/doctorlogin">Doctor Login</Link>
+                <Link to="/patientlogin">Patient Login</Link>
+              </div>
+            </div>
           </>
+        )}
+
+        {isLoggedIn && (
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
         )}
       </nav>
     </div>
