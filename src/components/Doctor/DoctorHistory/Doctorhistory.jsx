@@ -1,42 +1,105 @@
-import React from 'react'
-
-import { Link } from 'react-router-dom'
-import Header from '../../Header/Header.jsx'
+import React, { useEffect, useState, Error } from "react";
+import Header from "../../Header/Header.jsx";
+import Footer from "../../Footer/Footer.jsx";
 import "./doctorhistory.css";
-import Footer from '../../Footer/Footer.jsx';
-
 
 const Doctorhistory = () => {
+
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const role = localStorage.getItem("role");
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+
+    if (!userId) {
+      setError("User not logged in");
+      setLoading(false);
+      return;
+    }
+
+    let url = "";
+
+    if (role === "doctor") {
+      url = `http://localhost:8181/bookings/doctor/${userId}/appointments`;
+    } else {
+      url = `http://localhost:8181/bookings/patient/${userId}/appointments`;
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("History:", data);
+        setBookings(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err.message);
+        setLoading(false);
+      });
+
+  }, [role, userId]);
+
   return (
     <div className="doctorhistory">
-        {/* Header */}
+
+      {/* Header */}
       <Header />
 
+      {/* Content */}
+      <div className="history-container">
+        <h2>
+          {role === "doctor" ? "Doctor History" : "Patient History"}
+        </h2>
 
+        {/* Loading */}
+        {loading && <p>Loading...</p>}
 
-        {/* Doctor History Content */}
-        <div className="history-container">
-            <h2 className="history-title">Doctor History</h2>
-            <div className="history-content">
-                <table>
-                    <tr>
-                        <th>Patient Name</th>
-                        <th>Dieases</th>
-                        <th>Check Up Date</th>
-                        <th>Prescription</th>
-                    </tr>
+        {/* Error */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-                    
-                </table>
-            </div>
-        </div>
+        {/* Data */}
+        {!loading && !error && bookings.length === 0 && (
+          <p>No history found</p>
+        )}
 
+        {!loading && !error && bookings.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Disease</th>
+                <th>Date</th>
+              </tr>
+            </thead>
 
-       <div className="end-container">
-        <Footer />
+            <tbody>
+              {bookings.map((b) => (
+                <tr key={b.id}>
+                  <td>{b.patient?.patientName || "N/A"}</td>
+                  <td>{b.doctor?.doctorName || "N/A"}</td>
+                  <td>{b.disease || "N/A"}</td>
+                  <td>{b.appointmentDate || "N/A"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-    </div>
-  )
-}
 
-export default Doctorhistory
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
+export default Doctorhistory;

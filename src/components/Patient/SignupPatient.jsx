@@ -14,7 +14,7 @@ const SignUpPatient = () => {
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
 
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const SignUpPatient = () => {
         addressLine1,
         addressLine2,
         password,
-        confirmpassword
+        confirmPassword
       })
     });
 
@@ -161,7 +161,7 @@ const SignUpPatient = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              value={confirmpassword}
+              value={confirmPassword}
               onChange={(e) =>
               setConfirmPassword(e.target.value)}
               required

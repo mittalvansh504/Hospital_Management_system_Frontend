@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 import Header from '../../Header/Header.jsx'
 import Footer from '../../Footer/Footer.jsx'
 import './patienthistory.css'
@@ -20,9 +20,9 @@ const Patienthistory = () => {
                 <table>
                     <tr>
                         <th>Patient Name</th>
-                        <th>Dieases</th>
-                        <th>Check Up Date</th>
-                        <th>Prescription</th>
+                        <th>Doctor Name</th>
+                        <th>Doctor Phone</th>
+                        <th>Appointment Date</th>
                     </tr>
                 </table>
             </div>
