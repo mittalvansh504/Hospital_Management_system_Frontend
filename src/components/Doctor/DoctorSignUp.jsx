@@ -24,7 +24,7 @@ const SignUp = () => {
 
 
     React.useEffect(() => {
-    fetch("http://localhost:8181/departments")
+    fetch("http://localhost:8181/departments/getalldepartment")
       .then(res => res.json())
       .then(data => {
         console.log("Departments:", data); // 🔥 check this
@@ -41,7 +41,10 @@ const SignUp = () => {
 
   const handleSignUp = async(e) =>{
     e.preventDefault();
-
+    if(password !== confirmPassword){
+      alert("Passwords do not match");
+      return;
+    }
     const response = await fetch("http://localhost:8181/doctor/registration", {
       method:"POST",
       headers:{
@@ -51,7 +54,7 @@ const SignUp = () => {
         doctorName, 
         doctorEmail,
         phoneNo, 
-        doctorDob,
+        doctorDob,  
         degree,
         departmentIds: [Number(selectedDepartment)],
         addressLine1,

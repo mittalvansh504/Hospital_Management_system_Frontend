@@ -11,10 +11,10 @@ const Appointment = () => {
   const [patientPhone, setPatientPhone] = useState("");
   const [patientAddress, setPatientAddress] = useState("");
 
-  const [departments, setDepartments] = useState([]);
+  const [department, setDepartment] = useState([]);
   const [selectedDept, setSelectedDept] = useState("");
 
-  const [doctors, setDoctors] = useState([]);
+  const [doctor, setDoctor] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState("");
 
   const [disease, setDisease] = useState("");
@@ -24,9 +24,9 @@ const Appointment = () => {
 
   // ✅ Load departments
   useEffect(() => {
-    fetch("http://localhost:8181/departments")
+    fetch("http://localhost:8181/departments/getalldepartment")
       .then(res => res.json())
-      .then(data => setDepartments(data))
+      .then(data => setDepartment(data))
       .catch(err => console.log(err));
   }, []);
 
@@ -39,7 +39,7 @@ const Appointment = () => {
         .then(res => res.json())
         .then(data => {
           console.log("Doctors fetched:", data);
-          setDoctors(data);
+          setDoctor(data);
         })
         .catch(err => console.log(err));
     }
@@ -64,8 +64,8 @@ const Appointment = () => {
         patientDob,
         patientPhone,
         patientAddress,
-        departmentName: departments.find(d => d.departmentId == selectedDept)?.deptName,
-        doctorName: doctors.find(d => d.doctorId == selectedDoctor)?.doctorName,
+        departmentId: Number(selectedDept),
+        doctorId: Number(selectedDoctor),
         disease,
         appointmentDate
       })
@@ -108,10 +108,13 @@ const Appointment = () => {
           {/* Department Dropdown */}
           <label>Select Department:</label>
           <select value={selectedDept}
-            onChange={(e) => setSelectedDept(e.target.value)}
+            onChange={(e) => {
+              setSelectedDept(e.target.value);
+              setSelectedDoctor(""); // reset doctor
+            }}
             required>
             <option value="">-- Select Department --</option>
-            {departments.map((dept) => (
+            {department.map((dept) => (
               <option key={dept.departmentId} value={dept.departmentId}>
                 {dept.deptName}
               </option>
@@ -124,7 +127,7 @@ const Appointment = () => {
             onChange={(e) => setSelectedDoctor(e.target.value)}
             required>
             <option value="">-- Select Doctor --</option>
-            {doctors.map((doc) => (
+            {doctor.map((doc) => (
               <option key={doc.doctorId} value={doc.doctorId}>
                 {doc.doctorName}
               </option>
