@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer.jsx'
 
 const Appointment = () => {
 
+  // const patientId = localStorage.getItem("userId");
+
   const [patientName, setPatientName] = useState("");
   const [patientDob, setPatientDob] = useState("");
   const [patientPhone, setPatientPhone] = useState("");
@@ -71,10 +73,12 @@ const Appointment = () => {
       })
     });
 
-    const result = await response.text();
+    const result = await response.json();
 
     if (!response.ok) {
-      alert(result);
+      console.log("Dept:", selectedDept);
+      console.log("Doctor:", selectedDoctor);
+      alert(result.message);
     } else {
       alert("Appointment booked successfully!");
       navigate("/");

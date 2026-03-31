@@ -52,6 +52,10 @@ const About = () => {
               Birth centers are not typically equipped with the same contingency equipment and staff as a hospital, such as surgeons in case of a C-section or a neonatal intensive care unit. As a result, birth centers accommodate only healthy pregnancies without any known risk or complication factors.
               These facilities are guided by principles of prevention, sensitivity, safety, cost-effectiveness and appropriate medical intervention when needed.
             </p>
+            <div className="about-middle-right">
+              <img src="./Images/birth_center.jpg" alt="" />
+              
+            </div>
 
             <h1>3. Clinics and medical offices</h1>
             <p>The definition of a clinic is “a facility for diagnosis and treatment of outpatients.” There are many healthcare facilities that fit that definition across a wide variety of treatment specialties.
@@ -59,10 +63,20 @@ const About = () => {
               Clinics cover a lot of ground in healthcare. For example, you could visit a dental clinic to have a toothache investigated, a physical therapy clinic to recover from an athletic injury or a pediatric speech therapy clinic to help your child overcome an articulation disorder.
             </p>
 
+            <div className="about-middle-right">
+              <img src="./Images/medical_clinic.jpg" alt="" />
+              
+            </div>
+
             <h1>4. Urgent Care</h1>
             <p>Urgent care (UR) facilities exist for on-demand healthcare needs that aren’t severe enough for the emergency room, but are too severe or concerning to wait for a scheduled appointment at the doctor’s office. Urgent care is a common choice when children get sick, for example, and need an immediate diagnosis or relief from symptoms.
               Providers in the UR are experts in acute care. They can set broken bones and treat limb fractures; diagnose a viral illness; run strep tests, blood tests and urine labs and provide treatment for injuries. If a problem is too severe, then urgent care practitioners will call an ambulance or refer patients to a hospital or specialist.
             </p>
+
+            <div className="about-middle-right">
+              <img src="./Images/urgent_care.jpg" alt="" />
+              
+            </div>
           </div>
         </div>
       </div>
