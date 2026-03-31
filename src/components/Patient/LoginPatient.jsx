@@ -1,47 +1,52 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 import "./loginpatient.css";
 
 const Login = () => {
-  
-  const [email, setEmail] = React.useState(localStorage.getItem("email"));
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
-  const [password, setPassword] = React.useState(localStorage.getItem("password"));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8181/patient/loginpatient", {
+    try {
+      const response = await fetch("http://localhost:8181/patient/loginpatient", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email : email,
+          password : password
+        })
+      });
 
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    });
+      // ✅ Convert to JSON (IMPORTANT)
+      const result = await response.json();
 
-    const result = await response.text();
-    if(!response.ok){
-      alert(result);
-    }
-    else{
-      localStorage.setItem("isLoggedIn", "true"); // MUST be string
-      localStorage.setItem("role", "patient");     // role-based access
+      if (!response.ok) {
+        alert(result.message || "Login failed");
+        return;
+      }
 
-      window.dispatchEvent(new Event("storage"));
+      // ✅ Store required data in localStorage
+      localStorage.setItem("userId", result.patientId); // 🔥 VERY IMPORTANT
+      localStorage.setItem("role", "patient");
+      localStorage.setItem("isLoggedIn", "true");
+
       alert("Login Successful");
-
-      // ✅ Redirect to doctor history (protected route)
       navigate("/");
+
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert("Something went wrong!");
     }
   };
 
-  
   return (
     <div className="login">
 
@@ -53,13 +58,22 @@ const Login = () => {
         <h2>Login Form</h2>
 
         <form onSubmit={handleSubmit} className="login-input">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-          {/* IMPORTANT: class name fixed */}
           <button type="submit" className="login-button">
             Login
           </button>

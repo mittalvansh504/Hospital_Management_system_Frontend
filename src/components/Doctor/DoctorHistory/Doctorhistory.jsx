@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Error } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Header/Header.jsx";
 import Footer from "../../Footer/Footer.jsx";
 import "./doctorhistory.css";
@@ -20,13 +20,7 @@ const Doctorhistory = () => {
       return;
     }
 
-    let url = "";
-
-    if (role === "doctor") {
-      url = `http://localhost:8181/bookings/doctor/${userId}/appointments`;
-    } else {
-      url = `http://localhost:8181/bookings/patient/${userId}/appointments`;
-    }
+    let url = `http://localhost:8181/bookings/doctor/${userId}/appointments`;
 
     fetch(url)
       .then((res) => {
@@ -36,7 +30,6 @@ const Doctorhistory = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("History:", data);
         setBookings(data);
         setLoading(false);
       })
@@ -76,17 +69,17 @@ const Doctorhistory = () => {
             <thead>
               <tr>
                 <th>Patient</th>
-                <th>Doctor</th>
+                <th>Patient Phone </th>
                 <th>Disease</th>
                 <th>Date</th>
               </tr>
             </thead>
 
             <tbody>
-              {bookings.map((b) => (
-                <tr key={b.id}>
-                  <td>{b.patient?.patientName || "N/A"}</td>
-                  <td>{b.doctor?.doctorName || "N/A"}</td>
+              {bookings.map((b, index) => (
+                <tr key={b.bookingId || index}>
+                  <td>{b.patientName || "N/A"}</td>
+                  <td>{b.patientPhone || "N/A"}</td>
                   <td>{b.disease || "N/A"}</td>
                   <td>{b.appointmentDate || "N/A"}</td>
                 </tr>

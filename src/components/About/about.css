@@ -1,41 +1,98 @@
-.about{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+/* MAIN */
+.about {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MIDDLE AREA */
+.middle-area {
+  padding: 20px 20px;
+  max-width: 1350px;
+  margin: auto;
+}
+
+.middle-area h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #0b5ed7;
+}
+
+.middle-area p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* FLEX LAYOUT */
+.about-middle {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+/* LEFT SIDE */
+.about-middle-left {
+  flex: 2;
+}
+
+/* RIGHT SIDE */
+.about-middle-right {
+  flex: 1;
+}
+
+.about-middle-right img {
+  margin-top: 20px;
+  margin-left: 350px;
+  width: 50%;
+  height: 40%;
+  border-radius: 12px;
+  transition: transform 0.2s;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 
-.middle-area h2{
-    text-align: center;
-    font-size: 28px;
-
+.about-middle-right img:hover {
+    transform: scale(1.1);
+}
+/* CARDS */
+.facility-card {
+  background: #f8f9ff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: 0.3s;
 }
 
-.middle-area p{
-    font-size: 18px;
-    margin: 10px 20px;
-    font-family: 'Times New Roman', Times, serif;
+.facility-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-
-.about-middle-left{
-    margin-left: 20px;
-    margin-right: 550px;
+.facility-card h1 {
+  font-size: 20px;
+  color: #0b5ed7;
+  margin-bottom: 10px;
 }
 
-
-.about-middle-right img{
-    height: 300px;
-    width: 300px;
-    margin-left: 1000px;
-    
+.facility-card p {
+  font-size: 15px;
+  color: #555;
 }
 
-
-
+/* FOOTER */
 .end-container {
-    background-color: #111f42;
-    color: #ffffff;
-    margin-top: 40px;
+  background-color: #111f42;
+  color: #ffffff;
+  margin-top: 40px;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-middle {
+    flex-direction: column;
+  }
+}
