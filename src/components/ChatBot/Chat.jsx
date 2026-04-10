@@ -22,7 +22,7 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8085/chatGpt/api/version4/chat/chatWithGpt", {
+      const res = await fetch("http://localhost:8181/chatGpt/api/version4/chat/chatWithGpt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
