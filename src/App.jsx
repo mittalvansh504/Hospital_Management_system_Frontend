@@ -15,6 +15,7 @@ import Patienthistory from './components/Patient/PatientHistory/Patienthistory.j
 import PrivateRoute from './components/Private/PrivateRoute.jsx'
 import Footer from './components/Footer/Footer.jsx'
 
+
 const App = () => {
   return (
     <Routes>

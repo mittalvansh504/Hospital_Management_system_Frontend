@@ -1,0 +1,150 @@
+/* Floating Chat Button */
+.chat_bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    font-size: 22px;
+    padding: 14px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.chat_bot:hover {
+    transform: scale(1.1);
+}
+
+/* Chat Box */
+.chat_box {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Header */
+.chat_header {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Chat Body */
+.chat_body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f7f9fc;
+}
+
+/* Messages */
+.user_msg {
+    align-self: flex-end;
+    background: #007bff;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 15px 15px 0 15px;
+    margin: 6px;
+    max-width: 75%;
+    font-size: 14px;
+}
+
+.bot_msg {
+    align-self: flex-start;
+    background: #e4e6eb;
+    color: black;
+    padding: 10px 14px;
+    border-radius: 15px 15px 15px 0;
+    margin: 6px;
+    max-width: 75%;
+    font-size: 14px;
+}
+
+
+.typing {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 2px;
+    background: #555;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.typing:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    20% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+
+.chat_box {
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* Footer */
+.chat_footer {
+    display: flex;
+    padding: 8px;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+.chat_footer input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    outline: none;
+    border-radius: 20px;
+    background: #f1f1f1;
+}
+
+.chat_footer button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    margin-left: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.chat_footer button:hover {
+    background: #0056b3;
+}

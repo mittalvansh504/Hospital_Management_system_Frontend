@@ -3,6 +3,7 @@ import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 import "./home.css";
 import Image from "../Image/Image.jsx";
+import Chat from "../ChatBot/Chat.jsx";
 
 const Home = () => {
 
@@ -46,6 +47,9 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="ai">
+        <Chat />
+      </div>
       <hr />
       <div className="middle-down">
         <h1>Doctor List</h1>
