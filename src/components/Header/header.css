@@ -1,131 +1,148 @@
-/* Header container */
-.header {
-  width: 100%;
-  min-height: 70px;
-  background-color: #0b5ed7; /* medical blue */
-  color: #ffffff;
-  display: flex;
-  overflow: visible;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
+/* ===== RESET SAFETY ===== */
+
+
+* {
   box-sizing: border-box;
 }
 
-/* Logo / Title */
-.header h2 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 1px;
+/* ===== HEADER ===== */
+.header {
+  width: 100%;
+  background: #2563eb; /* cleaner blue */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 70px;
 }
 
-/* Navigation container */
+/* LOGO */
+.header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* NAV */
 .header nav {
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: nowrap; /* prevent breaking */
 }
 
-/* Links */
+/* LINKS */
 .header nav a {
-  color: #ffffff;
+  color: #e0e7ff;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  font-size: 18px;
+  padding: 6px 8px;
+  white-space: nowrap;
+  transition: 0.3s;
 }
 
 .header nav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
-/* Dropdown Container */
+/* DROPDOWN */
 .dropdown {
   position: relative;
-  display: inline-flex;
-  align-items: center;
+  white-space: nowrap;
 }
 
-/* Dropdown Button */
+/* BUTTON */
 .dropbtn {
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 4px;
+  color: #e0e7ff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  padding: 6px 8px;
 }
 
-/* Dropdown Button Hover */
-.dropdown:hover .dropbtn {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Dropdown Content */
+/* DROPDOWN BOX */
 .dropdown-content {
-  position: absolute; 
-  top: 100%;
+  position: absolute;
+  top: 110%;
   left: 0;
-  background-color: rgb(249, 76, 57);
-  min-width: 170px;
-  border-radius: 6px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 5px 0;
+  background: #360ac7;
+  min-width: 70px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   display: none;
-  z-index: 9999;
+  z-index: 1000;
 }
 
-/* Dropdown Links */
+/* DROPDOWN LINKS */
 .dropdown-content a {
-  color: #0b5ed7;
-  padding: 10px 15px;
+  color: #111827;
+  padding: 10px 12px;
+  font-size: 10px;
   display: block;
   text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
+  transition: 0.3s;
+  
 }
 
 .dropdown-content a:hover {
-  background-color: #f2f6ff;
+  background: #f9f3f1;
 }
 
-/* Show dropdown */
+/* SHOW */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Logout button */
-.header nav button {
-  background-color: #dc3545; /* red */
-  color: #ffffff;
+/* LOGOUT */
+.logout-btn {
+  background: #1e40af;
   border: none;
-  padding: 7px 14px;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 6px 12px;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
-.header nav button:hover {
-  background-color: #b02a37;
+.logout-btn:hover {
+  background: #1e3a8a;
 }
 
-/* Responsive */
+/* ===== RESPONSIVE FIX ===== */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
+    align-items: stretch;
     height: auto;
-    padding: 15px;
+    padding: 10px 15px;
+  }
+
+  .header h2 {
+    margin-bottom: 10px;
   }
 
   .header nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .header nav a,
+  .dropbtn,
+  .logout-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    margin-top: 5px;
   }
 }

@@ -1,58 +1,161 @@
 .home {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  background: #f5f9ff;
 }
 
-/* Middle Section */
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 8%;
+  background: linear-gradient(135deg, #0b5ed7, #3a8dff);
+  color: white;
+  flex-wrap: wrap;
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 300px;
+  animation: fadeUp 1s ease;
+}
+
+.hero-left h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.hero-left span {
+  color: #ffe082;
+}
+
+.hero-left p {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #e3ecff;
+}
+
+/* buttons */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary {
+  background: #fff;
+  color: #0b5ed7;
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #0b5ed7;
+}
+
+/* image */
+.hero-right img {
+  width: 400px;
+  animation: float 4s infinite ease-in-out;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* FEATURES */
 .middle-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 60px 8%;
+  flex-wrap: wrap;
 }
 
-.middle-left,
-.middle-right {
-    flex: 1;
-    padding: 20px;
-}
-
-.middle-left {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.middle-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.middle-right img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-
-.middle-down h1 {
+.card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  width: 260px;
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 10px;
+  transition: 0.4s;
 }
 
-
-/* Footer */
-.end-container {
-    background-color: #111f42;
-    color: #ffffff;
-    margin-top: 40px;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
+/* DOCTORS */
+.doctor-section {
+  text-align: center;
+  padding: 50px 8%;
+}
 
+.doctor-section h1 {
+  margin-bottom: 30px;
+}
 
+.doctor-list {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
+/* CHAT FLOATING */
+.chat-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
 
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+  }
 
+  .hero-right img {
+    width: 280px;
+    margin-top: 20px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}

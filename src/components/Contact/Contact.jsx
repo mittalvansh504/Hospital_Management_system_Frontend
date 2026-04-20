@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Header from "../Header/Header.jsx";
-import "./contact.css";
 import Footer from "../Footer/Footer.jsx";
+import "./contact.css";
 
 const Contact = () => {
 
@@ -14,6 +13,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -21,15 +21,8 @@ const Contact = () => {
     try {
       const response = await fetch("http://localhost:8181/Contact/send", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phoneNo,
-          queryArea
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phoneNo, queryArea })
       });
 
       const result = await response.text();
@@ -38,8 +31,6 @@ const Contact = () => {
         alert(result);
       } else {
         alert("Query submitted successfully");
-
-        // clear form
         setName("");
         setEmail("");
         setPhoneNo("");
@@ -47,8 +38,7 @@ const Contact = () => {
         navigate("/");
       }
     } catch (error) {
-      alert("Server error. Please try again later.");
-      console.error(error);
+      alert("Server error");
     } finally {
       setLoading(false);
     }
@@ -59,57 +49,61 @@ const Contact = () => {
 
       <Header />
 
-      {/* Contact Form */}
-      <div className="middle">
-        <h1>Contact Us</h1>
+      <div className="contact-wrapper">
 
-        <div className="form-data">
+        {/* LEFT IMAGE */}
+        <div className="contact-image">
+          <img src="./Images/Contact.jpg" alt="contact" />
+        </div>
+
+        {/* RIGHT FORM */}
+        <div className="contact-form">
+          <h2>Contact Us</h2>
+          <p>We’d love to hear from you</p>
+
           <form onSubmit={handleSubmit}>
 
-            <label>Name</label>
             <input
               type="text"
+              placeholder="Full Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e)=>setName(e.target.value)}
               required
             />
 
-            <label>Email</label>
             <input
               type="email"
+              placeholder="Email Address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e)=>setEmail(e.target.value)}
               required
             />
 
-            <label>Phone No</label>
             <input
               type="tel"
+              placeholder="Phone Number"
               value={phoneNo}
-              onChange={(e) => setPhoneNo(e.target.value)}
+              onChange={(e)=>setPhoneNo(e.target.value)}
               required
             />
 
-            <label>Query</label>
-            <textarea className="query"
-              type="text"
+            <textarea
+              placeholder="Your Message"
               value={queryArea}
-              onChange={(e) => setQueryArea(e.target.value)}
+              onChange={(e)=>setQueryArea(e.target.value)}
               required
             />
 
-            <button className="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+            <button disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
             </button>
 
           </form>
         </div>
+
       </div>
 
-      {/* Footer */}
-      <div className="end-container">
-        <Footer />
-      </div>
+      <Footer />
 
     </div>
   );
