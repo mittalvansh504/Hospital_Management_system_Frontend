@@ -32,29 +32,25 @@ const Image = () => {
     }
   }
 
-
-
   return (
-    <div className="Image">
-      <div className="middle-down">
-          <div className="middle-down-doctor-data">
-            <div className="middle-down-doctor-data-img">
-              <img src="/Images/Hospitalimg_1.png" alt="" />
-            </div>
-            <div className="middle-down-doctor-data-info">
-              <div className="doctor-data">
-                <h2>Vansh Mittal</h2>
-                <h2>Cardiologist</h2>
-                <p>MBBS</p>
-              </div>
-            </div>
-          </div>  
-          <button className='appointment-button' onClick={navigate}>
-              Appointment
-          </button>        
-        </div>
+  <div className="doctor-wrapper">
+  <div className="doctor-card">
+    <div className="doctor-img">
+      <img src="/Images/Hospitalimg_1.png" alt="doctor" />
     </div>
-  )
+
+    <div className="doctor-info">
+      <h2>Vansh Mittal</h2>
+      <h4>Cardiologist</h4>
+      <p>MBBS</p>
+
+      <button className="appointment-button" onClick={navigate}>
+        Book Appointment
+      </button>
+    </div>
+  </div>
+</div>
+  );
 }
 
 export default Image

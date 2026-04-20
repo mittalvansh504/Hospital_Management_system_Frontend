@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <h2>HealthCare</h2>
+      <h2 onClick={() => navigate("/")}>HealthCare</h2>
 
       <nav>
         <Link to="/">Home</Link>
