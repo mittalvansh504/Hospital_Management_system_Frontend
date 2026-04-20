@@ -55,131 +55,77 @@ const SignUpPatient = () => {
   }
 
   return (
-    <div className="signup">
+  <div className="signup">
 
-      <Header />
+    <Header />
 
-      {/* Form */}
-      <div className="form-data">
-        <h2>Sign Up Form</h2>
+    <div className="form-data">
 
-        <div className="form-input">
+      <div className="form-input">
+
+        {/* LEFT PANEL */}
+        <div className="form-left">
+          <h2>Welcome 👤</h2>
+          <p>Create your patient account and manage your health easily.</p>
+        </div>
+
+        {/* RIGHT FORM */}
+        <div className="form-right">
+          <h2>Patient Registration</h2>
+
           <form onSubmit={handleSignUp}>
-            
-            <label htmlFor="FirstName">First Name:</label>
-            <input type="text" 
-              id="firstName"
-              name="firstName"
-              value={firstName} 
-              onChange={(e) =>
-               setFirstName(e.target.value)
-              }
-              required 
-            />
 
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text"
-              id="lastName"
-              name="lastName" 
+            <input type="text" placeholder="First Name"
+              value={firstName}
+              onChange={(e)=>setFirstName(e.target.value)} required />
+
+            <input type="text" placeholder="Last Name"
               value={lastName}
-              onChange={(e) => 
-                setLastName(e.target.value)
-              } 
-              required 
-            />
+              onChange={(e)=>setLastName(e.target.value)} required />
 
-            <label htmlFor="email">Email:</label>
-            <input type="email" 
-              id="email"
-              name="email"
+            <input type="email" placeholder="Email"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-              required 
-            />
+              onChange={(e)=>setEmail(e.target.value)} required />
 
-            <label htmlFor="dob">Date of Birth:</label>
             <input type="date"
-              id="dob"
-              name="dob" 
-              value={dob} 
-              onChange={(e) =>
-                setdob(e.target.value)
-              }
-              required 
-            />
+              value={dob}
+              onChange={(e)=>setdob(e.target.value)} required />
 
+            <input type="tel" placeholder="Phone Number"
+              value={phoneNo}
+              onChange={(e)=>setPhoneNo(e.target.value)} required />
 
-            <label htmlFor="phoneNo">Phone Number:</label>
-            <input type="tel" 
-              id="phoneNo" 
-              name="phoneNo" 
-              value={phoneNo} 
-              onChange={(e) =>
-                setPhoneNo(e.target.value)
-              }
-              required
-            />
-
-
-
-            <label htmlFor="addressLine1">Address Line 1:</label>
-            <input type="text" 
-              id="addressLine1" 
-              name="addressLine1" 
+            <input type="text" placeholder="Address Line 1"
               value={addressLine1}
-              onChange={(e) =>
-                setAddressLine1(e.target.value)
-              }
-              required
-            />
+              onChange={(e)=>setAddressLine1(e.target.value)} required />
 
-            <label htmlFor="addressLine2">Address Line 2:</label>
-            <input type="text"
-              id="addressLine2" 
-              name="addressLine2" 
+            <input type="text" placeholder="Address Line 2"
               value={addressLine2}
-              onChange={(e) => 
-                setAddressLine2(e.target.value)
-              }
-            />
+              onChange={(e)=>setAddressLine2(e.target.value)} />
 
-            <label htmlFor="password">Password:</label>
-            <input type="password" 
-              id="password" 
-              name="password" 
+            <input type="password" placeholder="Password"
               value={password}
-              onChange={(e) => 
-                setPassword(e.target.value)
-              }
-              required 
-            />
+              onChange={(e)=>setPassword(e.target.value)} required />
 
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
+            <input type="password" placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e) =>
-              setConfirmPassword(e.target.value)}
-              required
-            />
+              onChange={(e)=>setConfirmPassword(e.target.value)} required />
 
-            <button className="submit-button" type="submit">
-              Sign Up
-            </button>
+            <button className="submit-button">Sign Up</button>
+
           </form>
         </div>
+
       </div>
 
-      {/* Footer */}
-      <div className="end-container">
-        <Footer />
-      </div>
     </div>
-  );
+
+    <div className="end-container">
+      <Footer />
+    </div>
+
+  </div>
+);
 };
 
 export default SignUpPatient;

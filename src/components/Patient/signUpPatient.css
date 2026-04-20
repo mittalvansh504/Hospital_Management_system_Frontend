@@ -1,80 +1,122 @@
-/* =======================
-   Page Container
-======================= */
 .signup {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(120deg, #e0ecff, #f7fbff);
+  font-family: "Poppins", sans-serif;
 }
 
-
-/* =======================
-   Form Section
-======================= */
+/* CENTER */
 .form-data {
-    flex: 1;
-    padding: 40px 20px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
 }
 
-.form-data h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #111f42;
-}
-
+/* CARD */
 .form-input {
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 30px;
-    width: 350px;
-    margin: auto;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
 }
 
-.form-input form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* LEFT */
+.form-left {
+  flex: 1;
+  background: linear-gradient(135deg, #111f42, #2f4db3);
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.form-input label {
-    font-size: 14px;
-    color: #111f42;
-    font-weight: 600;
+.form-left h2 {
+  font-size: 26px;
 }
 
-.form-input input {
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.form-left p {
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-.form-input input:focus {
-    outline: none;
-    border-color: #111f42;
+/* RIGHT */
+.form-right {
+  flex: 1.3;
+  padding: 35px;
 }
 
-/* =======================
-   Submit Button
-======================= */
+.form-right h2 {
+  margin-bottom: 20px;
+}
+
+/* FORM GRID */
+.form-right form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* FULL WIDTH */
+.form-right input[type="email"],
+.form-right input[type="tel"],
+.form-right input[type="text"]:nth-last-child(4),
 .submit-button {
-    margin-top: 15px;
-    background-color: #111f42;
-    color: white;
-    padding: 10px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  grid-column: span 2;
+}
+
+/* INPUT */
+.form-right input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f9fbff;
+}
+
+/* FOCUS */
+.form-right input:focus {
+  outline: none;
+  border-color: #111f42;
+  box-shadow: 0 0 0 3px rgba(17,31,66,0.1);
+}
+
+/* BUTTON */
+.submit-button {
+  margin-top: 10px;
+  padding: 13px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #111f42, #2f4db3);
+  color: white;
+  cursor: pointer;
 }
 
 .submit-button:hover {
-    background-color: #1c2d6b;
+  transform: translateY(-2px);
 }
 
-/* =======================
-   Footer
-======================= */
+/* FOOTER */
 .end-container {
-    background-color: #111f42;
+  margin-top: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .form-input {
+    flex-direction: column;
+  }
+
+  .form-left {
+    display: none;
+  }
+
+  .form-right form {
+    grid-template-columns: 1fr;
+  }
 }

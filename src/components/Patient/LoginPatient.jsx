@@ -48,44 +48,61 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+  <div className="login">
 
-      {/* Header */}
-      <Header />
+    <Header />
 
-      {/* Login Form */}
-      <div className="login-data">
-        <h2>Login Form</h2>
+    <div className="login-container">
 
-        <form onSubmit={handleSubmit} className="login-input">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+      <div className="login-card">
 
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <h2>Patient Login 🏥</h2>
+        <p className="subtitle">Access your health dashboard</p>
+
+        <form onSubmit={handleSubmit} className="login-form">
+
+          <div className="input-group">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder=" "
+            />
+            <label>Email Address</label>
+          </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder=" "
+            />
+            <label>Password</label>
+          </div>
 
           <button type="submit" className="login-button">
             Login
           </button>
+
+          <p className="login-extra">
+            Don’t have an account? <a href="/signup">Register</a>
+          </p>
+
         </form>
+
       </div>
 
-      {/* Footer */}
-      <div className="end-container">
-        <Footer />
-      </div>
     </div>
-  );
+
+    <div className="end-container">
+      <Footer />
+    </div>
+
+  </div>
+);
 };
 
 export default Login;

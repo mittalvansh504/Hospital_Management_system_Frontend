@@ -48,43 +48,57 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+  <div className="login">
 
-      <Header />
+    <Header />
 
-      <div className="login-data">
-        <h2>Doctor Login</h2>
+    <div className="login-container">
 
-        <form onSubmit={handleLogin} className="login-input">
+      <div className="login-card">
 
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        <h2>Doctor Login 👨‍⚕️</h2>
+        <p className="subtitle">Welcome back! Please login to continue</p>
 
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <form onSubmit={handleLogin} className="login-form">
+
+          <div className="input-group">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder=" "
+            />
+            <label>Email Address</label>
+          </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder=" "
+            />
+            <label>Password</label>
+          </div>
 
           <button type="submit" className="login-button">
             Login
           </button>
 
         </form>
+
       </div>
 
-      <div className="end-container">
-        <Footer />
-      </div>
     </div>
-  );
+
+    <div className="end-container">
+      <Footer />
+    </div>
+
+  </div>
+);
 };
 
 export default Login;
