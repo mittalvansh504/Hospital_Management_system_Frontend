@@ -21,7 +21,7 @@ const SignUp = () => {
     fetch("http://localhost:8181/departments/getalldepartment")
       .then(res => res.json())
       .then(data => {
-        console.log("Departments:", data); // 🔥 check this
+        console.log("Departments:", data); // check this
         setDepartments(data);
       })
 

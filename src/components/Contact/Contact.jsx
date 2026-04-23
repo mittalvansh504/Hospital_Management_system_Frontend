@@ -38,6 +38,7 @@ const Contact = () => {
         navigate("/");
       }
     } catch (error) {
+      console.error(error);
       alert("Server error");
     } finally {
       setLoading(false);

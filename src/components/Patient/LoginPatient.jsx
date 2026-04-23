@@ -25,7 +25,7 @@ const Login = () => {
         })
       });
 
-      // ✅ Convert to JSON (IMPORTANT)
+      // Convert to JSON (IMPORTANT)
       const result = await response.json();
 
       if (!response.ok) {
@@ -33,8 +33,8 @@ const Login = () => {
         return;
       }
 
-      // ✅ Store required data in localStorage
-      localStorage.setItem("userId", result.patientId); // 🔥 VERY IMPORTANT
+      // Store required data in localStorage
+      localStorage.setItem("userId", result.patientId); // VERY IMPORTANT
       localStorage.setItem("role", "patient");
       localStorage.setItem("isLoggedIn", "true");
 
