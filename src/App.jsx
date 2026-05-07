@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Header from './components/Header/Header.jsx'
 import Home from './components/Home/Home.jsx'
@@ -14,7 +14,7 @@ import Doctorhistory from './components/Doctor/DoctorHistory/Doctorhistory.jsx'
 import Patienthistory from './components/Patient/PatientHistory/Patienthistory.jsx'
 import PrivateRoute from './components/Private/PrivateRoute.jsx'
 import Footer from './components/Footer/Footer.jsx'
-
+import ChatPage from './components/ChatBot/ChatPage.jsx'
 
 const App = () => {
   return (
@@ -35,6 +35,8 @@ const App = () => {
       <Route path="/doctorhistory" element={<PrivateRoute role="doctor"><Doctorhistory /></PrivateRoute>}/>
 
       <Route path="/patienthistory" element={<PrivateRoute role="patient"><Patienthistory /></PrivateRoute>}/>
+
+      <Route path="/chat" element={<ChatPage />} />
 
       <Route path="/appointment" element={<Appointment />} />
 

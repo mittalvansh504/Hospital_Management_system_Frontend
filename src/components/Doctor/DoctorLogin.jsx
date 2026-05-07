@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer.jsx";
 
 const Login = () => {
 
-  const [email, setEmail] = React.useState("");
+  const [doctorEmail, setDoctorEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const Login = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          doctorEmail: email,
+          doctorEmail: doctorEmail,
           password: password
         })
       });
@@ -33,8 +33,8 @@ const Login = () => {
       }
       console.log("Login Response:", result);
 
-      // ✅ VERY IMPORTANT FIX
-      localStorage.setItem("userId", result.doctorId); // 🔥 MUST
+      // VERY IMPORTANT FIX
+      localStorage.setItem("userId", result.doctorId); // MUST
       localStorage.setItem("role", "doctor");
       localStorage.setItem("isLoggedIn", "true");
 
@@ -64,8 +64,8 @@ const Login = () => {
           <div className="input-group">
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={doctorEmail}
+              onChange={(e) => setDoctorEmail(e.target.value)}
               required
               placeholder=" "
             />

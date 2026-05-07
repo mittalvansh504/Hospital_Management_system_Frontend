@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import "./appointment.css";
 import Header from '../Header/Header.jsx'
 import Footer from '../Footer/Footer.jsx'
+import Swal from "sweetalert2";
 
 const Appointment = () => {
-
-  // const patientId = localStorage.getItem("userId");
 
   const [patientName, setPatientName] = useState("");
   const [patientDob, setPatientDob] = useState("");
@@ -22,9 +21,11 @@ const Appointment = () => {
   const [disease, setDisease] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  // ✅ Load departments
+  // Load departments
   useEffect(() => {
     fetch("http://localhost:8181/departments/getalldepartment")
       .then(res => res.json())
@@ -32,122 +33,136 @@ const Appointment = () => {
       .catch(err => console.log(err));
   }, []);
 
-  // ✅ Load doctors based on department ID
+  // Load doctors based on department
   useEffect(() => {
-  console.log("Selected Department:", selectedDept);
-
     if (selectedDept) {
       fetch(`http://localhost:8181/doctor/by-department/${selectedDept}`)
         .then(res => res.json())
-        .then(data => {
-          console.log("Doctors fetched:", data);
-          setDoctor(data);
-        })
+        .then(data => setDoctor(data))
         .catch(err => console.log(err));
     }
   }, [selectedDept]);
 
-
   const handleAppointment = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (!selectedDept || !selectedDoctor) {
-      alert("Please select department and doctor");
-      return;
+    try {
+      const response = await fetch("http://localhost:8181/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientName,
+          patientDob,
+          patientPhone,
+          patientAddress,
+          departmentId: Number(selectedDept),
+          doctorId: Number(selectedDoctor),
+          disease,
+          appointmentDate
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        Swal.fire("Error", result.message, "error");
+      } else {
+        const doctorName = doctor.find(d => d.doctorId == selectedDoctor)?.doctorName;
+
+        Swal.fire({
+          title: "Appointment Confirmed!",
+          html: `
+            <b>Patient:</b> ${patientName} <br/>
+            <b>Date:</b> ${appointmentDate} <br/>
+            <b>Doctor:</b> ${doctorName}
+          `,
+          icon: "success",
+          confirmButtonText: "View My Bookings"
+        }).then(() => {
+          navigate("/history");
+        });
+      }
+
+    } catch {
+      Swal.fire("Error", "Something went wrong!", "error");
     }
 
-    const response = await fetch("http://localhost:8181/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        patientName,
-        patientDob,
-        patientPhone,
-        patientAddress,
-        departmentId: Number(selectedDept),
-        doctorId: Number(selectedDoctor),
-        disease,
-        appointmentDate
-      })
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      console.log("Dept:", selectedDept);
-      console.log("Doctor:", selectedDoctor);
-      alert(result.message);
-    } else {
-      alert("Appointment booked successfully!");
-      navigate("/");
-    }
+    setLoading(false);
   };
 
   return (
-    <div className='appointment'>
+    <div className="appointment-page">
       <Header />
 
-      <div className="appointment-content">
-        <h2>Book an Appointment</h2>
-        <form onSubmit={handleAppointment} className="appointment-form">
+      <div className="appointment-wrapper">
 
-          <label>Patient Name:</label>
-          <input type="text" value={patientName}
-            onChange={(e) => setPatientName(e.target.value)} required />
+        <div className="appointment-left">
+          <h1>Welcome 👨‍⚕️</h1>
+          <p>Book your appointment easily and get the best healthcare service.</p>
+        </div>
 
-          <label>Patient Date of Birth:</label>
-          <input type="date" value={patientDob}
-            onChange={(e) => setPatientDob(e.target.value)} required />
+        <div className="appointment-right">
+          <form onSubmit={handleAppointment} className="appointment-form">
 
-          <label>Patient Phone:</label>
-          <input type="tel" value={patientPhone}
-            onChange={(e) => setPatientPhone(e.target.value)} required />
+            <h2>Book Appointment</h2>
 
-          <label>Patient Address:</label>
-          <input type="text" value={patientAddress}
-            onChange={(e) => setPatientAddress(e.target.value)} required />
+            <input type="text" placeholder="Patient Name"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)} required />
 
-          {/* Department Dropdown */}
-          <label>Select Department:</label>
-          <select value={selectedDept}
-            onChange={(e) => {
-              setSelectedDept(e.target.value);
-              setSelectedDoctor(""); // reset doctor
-            }}
-            required>
-            <option value="">-- Select Department --</option>
-            {department.map((dept) => (
-              <option key={dept.departmentId} value={dept.departmentId}>
-                {dept.deptName}
-              </option>
-            ))}
-          </select>
+            <input type="date"
+              value={patientDob}
+              onChange={(e) => setPatientDob(e.target.value)} required />
 
-          {/* Doctor Dropdown */}
-          <label>Select Doctor:</label>
-          <select value={selectedDoctor}
-            onChange={(e) => setSelectedDoctor(e.target.value)}
-            required>
-            <option value="">-- Select Doctor --</option>
-            {doctor.map((doc) => (
-              <option key={doc.doctorId} value={doc.doctorId}>
-                {doc.doctorName}
-              </option>
-            ))}
-          </select>
+            <input type="tel" placeholder="Phone"
+              value={patientPhone}
+              onChange={(e) => setPatientPhone(e.target.value)} required />
 
-          <label>Diseases:</label>
-          <input type="text" value={disease}
-            onChange={(e) => setDisease(e.target.value)} required />
+            <input type="text" placeholder="Address"
+              value={patientAddress}
+              onChange={(e) => setPatientAddress(e.target.value)} required />
 
-          <label>Appointment Date:</label>
-          <input type="date" value={appointmentDate}
-            onChange={(e) => setAppointmentDate(e.target.value)} required />
+            <select value={selectedDept}
+              onChange={(e) => {
+                setSelectedDept(e.target.value);
+                setSelectedDoctor("");
+              }} required>
 
-          <button type="submit">Book Appointment</button>
-        </form>
+              <option value="">Select Department</option>
+              {department.map((dept) => (
+                <option key={dept.departmentId} value={dept.departmentId}>
+                  {dept.deptName}
+                </option>
+              ))}
+            </select>
+
+            <select value={selectedDoctor}
+              onChange={(e) => setSelectedDoctor(e.target.value)} required>
+
+              <option value="">Select Doctor</option>
+              {doctor.map((doc) => (
+                <option key={doc.doctorId} value={doc.doctorId}>
+                  {doc.doctorName}
+                </option>
+              ))}
+            </select>
+
+            <input type="text" placeholder="Disease"
+              value={disease}
+              onChange={(e) => setDisease(e.target.value)} required />
+
+            <input type="date"
+              value={appointmentDate}
+              onChange={(e) => setAppointmentDate(e.target.value)} required />
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Booking..." : "Book Appointment"}
+            </button>
+
+          </form>
+        </div>
+
       </div>
 
       <Footer />

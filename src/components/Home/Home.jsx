@@ -3,8 +3,12 @@ import Footer from "../Footer/Footer.jsx";
 import "./home.css";
 import Image from "../Image/Image.jsx";
 import Chat from "../ChatBot/Chat.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="home">
 
@@ -22,8 +26,12 @@ const Home = () => {
           </p>
 
           <div className="hero-buttons">
-            <button className="btn-primary">Get Started</button>
-            <button className="btn-outline">Learn More</button>
+            <button
+              className="btn-outline"
+               onClick={() => navigate("/about")}
+            >
+              Learn More
+            </button>
           </div>
         </div>
 
@@ -33,7 +41,7 @@ const Home = () => {
       </section>
 
       {/* FEATURES / ABOUT */}
-      <section className="middle-container">
+      <section className="middle-container" id="about">
         <div className="card">
           <h3>Advanced Care</h3>
           <p>Modern equipment & experienced doctors for better treatment.</p>
@@ -56,15 +64,9 @@ const Home = () => {
         <div className="doctor-list">
           <Image />
           <Image />
-
           <Image />
           <Image />
           <Image />
-          <Image />
-          <Image />
-          <Image />
-          <Image />
-          
         </div>
       </section>
 
