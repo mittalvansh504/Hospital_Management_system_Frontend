@@ -3,16 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 import "./loginpatient.css";
-
 const Login = () => {
-
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch("http://localhost:8181/patient/loginpatient", {
         method: "POST",
@@ -88,7 +84,7 @@ const Login = () => {
           </button>
 
           <p className="login-extra">
-            Don’t have an account? <a href="/signup">Register</a>
+            Don’t have an account? <a href="/patientsignup">Register</a>
           </p>
 
         </form>
