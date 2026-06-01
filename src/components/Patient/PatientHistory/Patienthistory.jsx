@@ -19,7 +19,7 @@ const Patienthistory = () => {
       return;
     }
 
-    fetch(`http://localhost:8181/bookings/patient/${userId}/appointments`)
+    fetch(`http://localhost:8182/bookings/patient/getAllAppointmentsForPatient/${userId}`)
       .then(res => {
         if (!res.ok) throw new Error("Failed to fetch data");
         return res.json();

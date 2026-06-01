@@ -27,7 +27,7 @@ const Appointment = () => {
 
   // Load departments
   useEffect(() => {
-    fetch("http://localhost:8181/departments/getalldepartment")
+    fetch("http://localhost:8182/departments/getAllDepartments")
       .then(res => res.json())
       .then(data => setDepartment(data))
       .catch(err => console.log(err));
@@ -36,7 +36,7 @@ const Appointment = () => {
   // Load doctors based on department
   useEffect(() => {
     if (selectedDept) {
-      fetch(`http://localhost:8181/doctor/by-department/${selectedDept}`)
+      fetch(`http://localhost:8182/doctor/getDoctorByDoctorId/${selectedDept}`)
         .then(res => res.json())
         .then(data => setDoctor(data))
         .catch(err => console.log(err));
@@ -48,7 +48,7 @@ const Appointment = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8181/bookings", {
+      const response = await fetch("http://localhost:8182/bookings/createBooking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -20,7 +20,7 @@ const Doctorhistory = () => {
       return;
     }
 
-    let url = `http://localhost:8181/bookings/doctor/${userId}/appointments`;
+    let url = `http://localhost:8182/bookings/doctor/getAllAppointmentsForDoctor/${userId}`;
 
     fetch(url)
       .then((res) => {

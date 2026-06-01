@@ -1,4 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  FaRobot,
+  FaPaperPlane,
+  FaPaperclip,
+  FaUser
+} from "react-icons/fa";
+
 import "./chatPage.css";
 
 const ChatPage = () => {
@@ -16,6 +23,7 @@ const ChatPage = () => {
   }, [messages]);
 
   // FILE UPLOAD
+
   const handleFileUpload = (e) => {
 
     const file = e.target.files[0];
@@ -27,13 +35,14 @@ const ChatPage = () => {
     const newMessage = {
       sender: "user",
       text: file.name,
-      file: fileURL
+      image: fileURL
     };
 
     setMessages((prev) => [...prev, newMessage]);
   };
 
   // SEND MESSAGE
+
   const sendMessage = async () => {
 
     if (!message.trim()) return;
@@ -57,7 +66,7 @@ const ChatPage = () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            message: message
+            message
           })
         }
       );
@@ -96,22 +105,52 @@ const ChatPage = () => {
 
       <div className="sidebar">
 
-        <h2>AI Assistant</h2>
+        <div className="sidebar_top">
 
-        <p>
-          Upload reports or chat with AI
-        </p>
+          <h2>Smart Medi AI</h2>
+
+          <p>
+            Your intelligent healthcare assistant.
+            Upload reports, ask health-related
+            questions, and chat instantly with AI.
+          </p>
+
+        </div>
+
+        <div className="sidebar_bottom">
+
+          <h4>Features</h4>
+
+          <p>✔ AI Healthcare Chat</p>
+          <p>✔ Upload Medical Reports</p>
+          <p>✔ Fast Responses</p>
+          <p>✔ User Friendly Experience</p>
+
+        </div>
 
       </div>
 
-      {/* CHAT AREA */}
+      {/* CHAT CONTAINER */}
 
       <div className="chat_container">
 
         {/* HEADER */}
 
         <div className="chat_header">
-          🤖 Smart AI Chatbot
+
+          <div className="chat_header_left">
+
+            <div className="bot_logo">
+              <FaRobot />
+            </div>
+
+            <div>
+              <h2>Smart Medi Assistant</h2>
+              <p>Online Now</p>
+            </div>
+
+          </div>
+
         </div>
 
         {/* BODY */}
@@ -125,21 +164,30 @@ const ChatPage = () => {
               className={`message ${msg.sender}`}
             >
 
-              <div className="message_text">
+              <div className="message_content">
 
-                {msg.text}
+                <div className="avatar">
 
-                {msg.file && (
-                  <div>
-                    <a
-                      href={msg.file}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Open Report
-                    </a>
-                  </div>
-                )}
+                  {msg.sender === "user"
+                    ? <FaUser />
+                    : <FaRobot />
+                  }
+
+                </div>
+
+                <div className="message_text">
+
+                  {msg.text}
+
+                  {msg.image && (
+                    <img
+                      src={msg.image}
+                      alt="upload"
+                      className="chat_image"
+                    />
+                  )}
+
+                </div>
 
               </div>
 
@@ -161,30 +209,40 @@ const ChatPage = () => {
 
         <div className="chat_footer">
 
-          <label className="upload_btn">
-            📎
+          <div className="footer_container">
+
+            <label className="icon_btn upload_btn">
+
+              <FaPaperclip />
+
+              <input
+                type="file"
+                hidden
+                onChange={handleFileUpload}
+              />
+
+            </label>
+
             <input
-              type="file"
-              hidden
-              onChange={handleFileUpload}
+              type="text"
+              placeholder="Ask anything..."
+              value={message}
+              onChange={(e) =>
+                setMessage(e.target.value)
+              }
+              onKeyDown={(e) =>
+                e.key === "Enter" && sendMessage()
+              }
             />
-          </label>
 
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={message}
-            onChange={(e) =>
-              setMessage(e.target.value)
-            }
-            onKeyDown={(e) =>
-              e.key === "Enter" && sendMessage()
-            }
-          />
+            <button
+              className="icon_btn send_btn"
+              onClick={sendMessage}
+            >
+              <FaPaperPlane />
+            </button>
 
-          <button onClick={sendMessage}>
-            Send
-          </button>
+          </div>
 
         </div>
 
