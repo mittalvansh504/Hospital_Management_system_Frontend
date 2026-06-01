@@ -1,26 +1,68 @@
+/* GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
+/* MAIN PAGE */
+
 .chat_page{
-  display:flex;
   height:100vh;
-  background:#343541;
-  color:white;
+  display:flex;
+  background:#0f172a;
+  overflow:hidden;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-  width:250px;
-  background:#202123;
-  padding:20px;
+  width:260px;
+  background:linear-gradient(
+    180deg,
+    #111827,
+    #1e293b
+  );
+  color:white;
+  padding:30px 20px;
+  border-right:1px solid rgba(255,255,255,0.08);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
-.sidebar h2{
+.sidebar_top h2{
+  font-size:28px;
   margin-bottom:10px;
+  font-weight:700;
+  color:#38bdf8;
+}
+
+.sidebar_top p{
+  color:#cbd5e1;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.sidebar_bottom{
+  background:rgba(255,255,255,0.05);
+  padding:15px;
+  border-radius:14px;
+  backdrop-filter:blur(10px);
+}
+
+.sidebar_bottom h4{
+  margin-bottom:8px;
+  color:#38bdf8;
+}
+
+.sidebar_bottom p{
+  font-size:13px;
+  color:#d1d5db;
 }
 
 /* CHAT CONTAINER */
@@ -29,15 +71,58 @@
   flex:1;
   display:flex;
   flex-direction:column;
+  background:
+    radial-gradient(circle at top right,
+      rgba(56,189,248,0.15),
+      transparent 25%),
+    #0f172a;
 }
 
 /* HEADER */
 
 .chat_header{
-  padding:20px;
-  background:#40414f;
-  font-size:20px;
+  height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.chat_header_left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.bot_logo{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:linear-gradient(
+    135deg,
+    #38bdf8,
+    #0ea5e9
+  );
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:22px;
   font-weight:bold;
+  box-shadow:0 0 20px rgba(56,189,248,0.4);
+}
+
+.chat_header h2{
+  color:white;
+  font-size:22px;
+}
+
+.chat_header p{
+  color:#94a3b8;
+  font-size:13px;
 }
 
 /* BODY */
@@ -45,14 +130,27 @@
 .chat_body{
   flex:1;
   overflow-y:auto;
-  padding:20px;
+  padding:30px;
+  scroll-behavior:smooth;
+}
+
+/* SCROLLBAR */
+
+.chat_body::-webkit-scrollbar{
+  width:6px;
+}
+
+.chat_body::-webkit-scrollbar-thumb{
+  background:#38bdf8;
+  border-radius:10px;
 }
 
 /* MESSAGE */
 
 .message{
   display:flex;
-  margin-bottom:15px;
+  margin-bottom:25px;
+  animation:fadeIn 0.3s ease;
 }
 
 .message.user{
@@ -63,55 +161,205 @@
   justify-content:flex-start;
 }
 
-.message_text{
-  max-width:60%;
-  padding:12px;
-  border-radius:10px;
-  background:#444654;
-}
-
-.message.user .message_text{
-  background:#19c37d;
-}
-
-/* FOOTER */
-
-.chat_footer{
+.message_content{
   display:flex;
-  gap:10px;
-  padding:15px;
-  background:#40414f;
+  gap:12px;
+  align-items:flex-end;
+  max-width:75%;
 }
 
-.chat_footer input[type="text"]{
-  flex:1;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  outline:none;
-}
+/* AVATAR */
 
-.chat_footer button{
-  padding:12px 18px;
-  border:none;
-  background:#19c37d;
+.avatar{
+  min-width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:18px;
   color:white;
-  border-radius:8px;
-  cursor:pointer;
+  font-weight:bold;
 }
 
-/* UPLOAD */
+.user .avatar{
+  background:linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+}
 
-.upload_btn{
-  background:#19c37d;
-  padding:10px 14px;
-  border-radius:8px;
-  cursor:pointer;
+.bot .avatar{
+  background:linear-gradient(
+    135deg,
+    #38bdf8,
+    #0ea5e9
+  );
+}
+
+/* TEXT BOX */
+
+.message_text{
+  padding:15px 18px;
+  border-radius:18px;
+  line-height:1.6;
+  font-size:15px;
+  word-break:break-word;
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.user .message_text{
+  background:linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+  color:white;
+  border-bottom-right-radius:5px;
+}
+
+.bot .message_text{
+  background:#1e293b;
+  color:#f1f5f9;
+  border-bottom-left-radius:5px;
+}
+
+/* IMAGE */
+
+.chat_image{
+  width:220px;
+  border-radius:14px;
+  margin-top:10px;
+  object-fit:cover;
 }
 
 /* TYPING */
 
 .typing{
-  color:#ccc;
-  margin-top:10px;
+  margin-left:55px;
+  color:#94a3b8;
+  animation:pulse 1s infinite;
+}
+
+/* FOOTER */
+
+.chat_footer{
+  padding:20px;
+  background:rgba(255,255,255,0.04);
+  border-top:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(14px);
+}
+
+.footer_container{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#1e293b;
+  padding:12px;
+  border-radius:18px;
+}
+
+/* INPUT */
+
+.footer_container input[type="text"]{
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:white;
+  font-size:15px;
+}
+
+.footer_container input[type="text"]::placeholder{
+  color:#94a3b8;
+}
+
+/* BUTTONS */
+
+.icon_btn{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:18px;
+  color:white;
+  transition:0.3s;
+}
+
+.upload_btn{
+  background:#334155;
+}
+
+.upload_btn:hover{
+  transform:scale(1.08);
+  background:#475569;
+}
+
+.send_btn{
+  background:linear-gradient(
+    135deg,
+    #38bdf8,
+    #0ea5e9
+  );
+}
+
+.send_btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 15px rgba(56,189,248,0.5);
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes pulse{
+  0%{
+    opacity:0.4;
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    opacity:0.4;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .chat_header{
+    padding:0 15px;
+  }
+
+  .chat_body{
+    padding:15px;
+  }
+
+  .message_content{
+    max-width:90%;
+  }
+
+  .footer_container{
+    gap:10px;
+  }
+
 }

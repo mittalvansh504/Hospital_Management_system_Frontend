@@ -9,7 +9,9 @@ const SignUp = () => {
   const [doctorEmail, setDoctorEmail] = React.useState("");
   const [phoneNo, setPhoneNo] = React.useState("");
   const [doctorDob, setDoctorDob] = React.useState("");
-  const [degree, setDegree] = React.useState("");
+  const [degree, setDegree] = React.useState([]);
+  const [selectedDegree, setSelectedDegree] = React.useState("");
+  const [experience, setExperience] = React.useState("");
   const [departments, setDepartments] = React.useState([]);
   const [selectedDepartment, setSelectedDepartment] = React.useState("");
   const [addressLine1, setAddressLine1] = React.useState("");
@@ -17,14 +19,26 @@ const SignUp = () => {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
+
     React.useEffect(() => {
-    fetch("http://localhost:8181/departments/getalldepartment")
+    fetch("http://localhost:8182/doctor/allDegree")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Degree:", data); // check this
+        setDegree(data);
+      })
+
+      .catch(err => console.error(err));
+    }, []);
+    
+  
+    React.useEffect(() => {
+    fetch("http://localhost:8182/departments/getAllDepartments")
       .then(res => res.json())
       .then(data => {
         console.log("Departments:", data); // check this
         setDepartments(data);
       })
-
       .catch(err => console.error(err));
     }, []);
 
@@ -38,7 +52,7 @@ const SignUp = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:8181/doctor/registration", {
+    const response = await fetch("http://localhost:8182/doctor/postDoctor", {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -48,8 +62,9 @@ const SignUp = () => {
         doctorName,
         doctorEmail,
         phoneNo,
-        doctorDob,  
+        doctorDob,
         degree,
+        experience,
         departmentIds: [Number(selectedDepartment)],
         addressLine1,
         addressLine2,
@@ -71,106 +86,119 @@ const SignUp = () => {
       navigate("/");
     }
   }
+  
+    return (
+    <div className="signup">
+      <Header />
 
-  return (
-  <div className="signup">
-    <Header />
+      <div className="form-data">
+        <div className="form-input">
 
-    <div className="form-data">
-      <div className="form-input">
+          {/* LEFT PANEL */}
+          <div className="form-left">
+            <h2>Welcome 👨‍⚕️</h2>
+            <p>Join our healthcare platform and grow your practice.</p>
+          </div>
 
-        {/* LEFT PANEL */}
-        <div className="form-left">
-          <h2>Welcome 👨‍⚕️</h2>
-          <p>Join our healthcare platform and grow your practice.</p>
+          {/* RIGHT FORM */}
+          <div className="form-right">
+            <h2>Doctor Registration</h2>
+
+            <form onSubmit={handleSignUp}>
+
+              <div className="input-group">
+                <input type="text" placeholder=" " value={doctorName}
+                  onChange={(e)=>setDoctorName(e.target.value)} required />
+                <label>Doctor Name</label>
+              </div>
+
+              <div className="input-group">
+                <input type="email" placeholder=" " value={doctorEmail}
+                  onChange={(e)=>setDoctorEmail(e.target.value)} required />
+                <label>Email</label>
+              </div>
+
+              <div className="input-group">
+                <input type="tel" placeholder=" " value={phoneNo}
+                  onChange={(e)=>setPhoneNo(e.target.value)} required />
+                <label>Phone</label>
+              </div>
+
+              <div className="input-group">
+                <input type="date" placeholder=" " value={doctorDob}
+                  onChange={(e)=>setDoctorDob(e.target.value)} required />
+                <label>DOB</label>
+              </div>
+
+              <div className="input-group">
+                <select value={selectedDegree}
+                  onChange={(e)=>setSelectedDegree(e.target.value)} required>
+                  <option value=""></option>
+                  {degree.map((deg)=>(
+                    <option key={deg.degreeId} value={deg.degreeId}>
+                      {deg.degreeName}
+                    </option>
+                  ))}
+                </select>
+                <label>Degree</label>
+              </div>
+
+              <div className="input-group">
+                <input type="number" placeholder=" " value={experience}
+                  onChange={(e)=>setExperience(e.target.value)} required />
+                <label>Years of Experience</label>
+              </div>
+
+              <div className="input-group">
+                <select value={selectedDepartment}
+                  onChange={(e)=>setSelectedDepartment(e.target.value)} required>
+                  <option value=""></option>
+                  {departments.map((dept)=>(
+                    <option key={dept.departmentId} value={dept.departmentId}>
+                      {dept.deptName}
+                    </option>
+                  ))}
+                </select>
+                <label>Department</label>
+              </div>
+
+              <div className="input-group">
+                <input type="text" placeholder=" " value={addressLine1}
+                  onChange={(e)=>setAddressLine1(e.target.value)} required />
+                <label>Address Line 1</label>
+              </div>
+
+              <div className="input-group">
+                <input type="text" placeholder=" " value={addressLine2}
+                  onChange={(e)=>setAddressLine2(e.target.value)} />
+                <label>Address Line 2</label>
+              </div>
+
+              <div className="input-group">
+                <input type="password" placeholder=" " value={password}
+                  onChange={(e)=>setPassword(e.target.value)} required />
+                <label>Password</label>
+              </div>
+
+              <div className="input-group">
+                <input type="password" placeholder=" " value={confirmPassword}
+                  onChange={(e)=>setConfirmPassword(e.target.value)} required />
+                <label>Confirm Password</label>
+              </div>
+
+              <button className="submit-button">Sign Up</button>
+
+            </form>
+          </div>
+
         </div>
+      </div>
 
-        {/* RIGHT FORM */}
-        <div className="form-right">
-          <h2>Doctor Registration</h2>
-
-          <form onSubmit={handleSignUp}>
-
-            <div className="input-group">
-              <input type="text" placeholder=" " value={doctorName}
-                onChange={(e)=>setDoctorName(e.target.value)} required />
-              <label>Doctor Name</label>
-            </div>
-
-            <div className="input-group">
-              <input type="email" placeholder=" " value={doctorEmail}
-                onChange={(e)=>setDoctorEmail(e.target.value)} required />
-              <label>Email</label>
-            </div>
-
-            <div className="input-group">
-              <input type="tel" placeholder=" " value={phoneNo}
-                onChange={(e)=>setPhoneNo(e.target.value)} required />
-              <label>Phone</label>
-            </div>
-
-            <div className="input-group">
-              <input type="date" placeholder=" " value={doctorDob}
-                onChange={(e)=>setDoctorDob(e.target.value)} required />
-              <label>DOB</label>
-            </div>
-
-            <div className="input-group">
-              <input type="text" placeholder=" " value={degree}
-                onChange={(e)=>setDegree(e.target.value)} required />
-              <label>Degree</label>
-            </div>
-
-            <div className="input-group">
-              <select value={selectedDepartment}
-                onChange={(e)=>setSelectedDepartment(e.target.value)} required>
-                <option value=""></option>
-                {departments.map((dept)=>(
-                  <option key={dept.departmentId} value={dept.departmentId}>
-                    {dept.deptName}
-                  </option>
-                ))}
-              </select>
-              <label>Department</label>
-            </div>
-
-            <div className="input-group">
-              <input type="text" placeholder=" " value={addressLine1}
-                onChange={(e)=>setAddressLine1(e.target.value)} required />
-              <label>Address Line 1</label>
-            </div>
-
-            <div className="input-group">
-              <input type="text" placeholder=" " value={addressLine2}
-                onChange={(e)=>setAddressLine2(e.target.value)} />
-              <label>Address Line 2</label>
-            </div>
-
-            <div className="input-group">
-              <input type="password" placeholder=" " value={password}
-                onChange={(e)=>setPassword(e.target.value)} required />
-              <label>Password</label>
-            </div>
-
-            <div className="input-group">
-              <input type="password" placeholder=" " value={confirmPassword}
-                onChange={(e)=>setConfirmPassword(e.target.value)} required />
-              <label>Confirm Password</label>
-            </div>
-
-            <button className="submit-button">Sign Up</button>
-
-          </form>
-        </div>
-
+      <div className="end-container">
+        <Footer />
       </div>
     </div>
-
-    <div className="end-container">
-      <Footer />
-    </div>
-  </div>
-);
+  );
 };
 
 export default SignUp;

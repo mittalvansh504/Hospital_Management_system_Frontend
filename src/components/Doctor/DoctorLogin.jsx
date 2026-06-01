@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8181/doctor/loginDoctor", {
+      const response = await fetch("http://localhost:8182/doctor/loginDoctor", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
