@@ -1,52 +1,155 @@
 /* =======================
    Page Container
 ======================= */
-.doctorhistory {
-    padding: 15px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
 
+.doctorhistory {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f4f7fc;
+}
 
 /* =======================
-   Content Section
+   Main Container
 ======================= */
 
-.content-data {
-    flex: 1;
-    padding: 40px 20px;
+.history-container {
+  width: 92%;
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-.content-data h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #111f42;
+.history-container h2 {
+  text-align: center;
+  color: #0f2557;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
 }
+
+/* =======================
+   Table
+======================= */
 
 table {
+  width: 100%;
   border-collapse: collapse;
-  width: 100%; 
+  overflow: hidden;
+  border-radius: 12px;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 10px; 
-  text-align: left; 
+/* Header */
+
+thead tr {
+  background: #2563eb;
 }
 
-th {
-  background-color: #f2f2f2;
+thead th {
+  color: white;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
 }
 
+/* Body */
 
+tbody tr {
+  transition: 0.3s;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+tbody tr:hover {
+  background: #e8f0ff;
+}
+
+tbody td {
+  padding: 16px;
+  text-align: center;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+}
 
 /* =======================
-   Footer
+   Button
 ======================= */
 
-.end-container {
-    background-color: #111f42;
-    color: #ffffff;
-    margin-top: 40px;
+tbody button {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+tbody button:hover {
+  background: #15803d;
+}
+
+/* =======================
+   Status
+======================= */
+
+.status-booked {
+  background: #fef3c7;
+  color: #b45309;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.status-visited {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* =======================
+   Loading & Error
+======================= */
+
+.history-container p {
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* =======================
+   Responsive
+======================= */
+
+@media (max-width: 768px) {
+
+  .history-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .history-container h2 {
+    font-size: 1.5rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
