@@ -19,7 +19,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8182/Contact/send", {
+      const response = await fetch("https://hospitalbackend-f2ja.onrender.com/Contact/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phoneNo, queryArea })

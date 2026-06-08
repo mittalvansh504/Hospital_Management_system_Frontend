@@ -24,7 +24,7 @@ const SignUpPatient = () => {
   const handleSignUp = async(e) =>{
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8182/patient/addPatient", {
+    const response = await fetch("https://hospitalbackend-f2ja.onrender.com/patient/addPatient", {
       method:"POST",
       headers:{
         "Content-Type":"application/json"

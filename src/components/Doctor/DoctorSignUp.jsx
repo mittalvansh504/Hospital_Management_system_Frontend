@@ -21,7 +21,7 @@ const SignUp = () => {
 
 
     React.useEffect(() => {
-    fetch("http://localhost:8182/doctor/allDegree")
+    fetch("https://hospitalbackend-f2ja.onrender.com/doctor/allDegree")
       .then(res => res.json())
       .then(data => {
         console.log("Degree:", data); // check this
@@ -33,7 +33,7 @@ const SignUp = () => {
 
   
     React.useEffect(() => {
-    fetch("http://localhost:8182/departments/getAllDepartments")
+    fetch("https://hospitalbackend-f2ja.onrender.com/departments/getAllDepartments")
       .then(res => res.json())
       .then(data => {
         console.log("Departments:", data); // check this
@@ -52,7 +52,7 @@ const SignUp = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:8182/doctor/postDoctor", {
+    const response = await fetch("https://hospitalbackend-f2ja.onrender.com/doctor/postDoctor", {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
