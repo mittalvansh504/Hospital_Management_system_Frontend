@@ -30,7 +30,8 @@ const Login = () => {
       }
 
       // Store required data in localStorage
-      localStorage.setItem("userId", result.patientId); // VERY IMPORTANT
+      localStorage.setItem("userId", result.patientId);
+      localStorage.setItem("patientId", result.patientId);
       localStorage.setItem("role", "patient");
       localStorage.setItem("isLoggedIn", "true");
 

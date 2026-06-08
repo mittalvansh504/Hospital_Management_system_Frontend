@@ -9,11 +9,11 @@ const SignUp = () => {
   const [doctorEmail, setDoctorEmail] = React.useState("");
   const [phoneNo, setPhoneNo] = React.useState("");
   const [doctorDob, setDoctorDob] = React.useState("");
-  const [degree, setDegree] = React.useState([]);
-  const [selectedDegree, setSelectedDegree] = React.useState("");
+  const [degreeId, setDegreeId] = React.useState([]);
+  const [selectedDegreeId, setSelectedDegreeId] = React.useState("");
   const [experience, setExperience] = React.useState("");
-  const [departments, setDepartments] = React.useState([]);
-  const [selectedDepartment, setSelectedDepartment] = React.useState("");
+  const [departmentId, setDepartmentId] = React.useState([]);
+  const [selectedDepartmentId, setSelectedDepartmentId] = React.useState("");
   const [addressLine1, setAddressLine1] = React.useState("");
   const [addressLine2, setAddressLine2] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -25,19 +25,19 @@ const SignUp = () => {
       .then(res => res.json())
       .then(data => {
         console.log("Degree:", data); // check this
-        setDegree(data);
+        setDegreeId(data);
       })
 
       .catch(err => console.error(err));
     }, []);
-    
+
   
     React.useEffect(() => {
     fetch("http://localhost:8182/departments/getAllDepartments")
       .then(res => res.json())
       .then(data => {
         console.log("Departments:", data); // check this
-        setDepartments(data);
+        setDepartmentId(data);
       })
       .catch(err => console.error(err));
     }, []);
@@ -63,9 +63,9 @@ const SignUp = () => {
         doctorEmail,
         phoneNo,
         doctorDob,
-        degree,
+        degreeId: selectedDegreeId,
         experience,
-        departmentIds: [Number(selectedDepartment)],
+        departmentId: selectedDepartmentId,
         addressLine1,
         addressLine2,
         password,
@@ -131,10 +131,10 @@ const SignUp = () => {
               </div>
 
               <div className="input-group">
-                <select value={selectedDegree}
-                  onChange={(e)=>setSelectedDegree(e.target.value)} required>
+                <select value={selectedDegreeId}
+                  onChange={(e)=>setSelectedDegreeId(e.target.value)} required>
                   <option value=""></option>
-                  {degree.map((deg)=>(
+                  {degreeId.map((deg)=>(
                     <option key={deg.degreeId} value={deg.degreeId}>
                       {deg.degreeName}
                     </option>
@@ -150,10 +150,10 @@ const SignUp = () => {
               </div>
 
               <div className="input-group">
-                <select value={selectedDepartment}
-                  onChange={(e)=>setSelectedDepartment(e.target.value)} required>
+                <select value={selectedDepartmentId}
+                  onChange={(e)=>setSelectedDepartmentId(e.target.value)} required>
                   <option value=""></option>
-                  {departments.map((dept)=>(
+                  {departmentId.map((dept)=>(
                     <option key={dept.departmentId} value={dept.departmentId}>
                       {dept.deptName}
                     </option>

@@ -6,13 +6,14 @@ import Footer from "../Footer/Footer.jsx";
 
 const SignUpPatient = () => {
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [patientName, setPatientName] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setdob] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [addressLine2, setAddressLine2] = useState("");
+  const [patientDOB, setPatientDOB] = useState("");
+  const [fatherName, setFatherName] = useState("");
+  const [motherName, setMotherName] = useState("");
+  const [permanentAddress, setPermanentAddress] = useState("");
+  const [currentAddress, setCurrentAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -29,13 +30,14 @@ const SignUpPatient = () => {
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
-        firstName, 
-        lastName, 
+        patientName,
         email,
-        dob,
         phoneNo, 
-        addressLine1,
-        addressLine2,
+        patientDOB,
+        fatherName,
+        motherName,
+        permanentAddress,
+        currentAddress,
         password,
         confirmPassword
       })
@@ -75,33 +77,38 @@ const SignUpPatient = () => {
 
           <form onSubmit={handleSignUp}>
 
-            <input type="text" placeholder="First Name"
-              value={firstName}
-              onChange={(e)=>setFirstName(e.target.value)} required />
-
-            <input type="text" placeholder="Last Name"
-              value={lastName}
-              onChange={(e)=>setLastName(e.target.value)} required />
+            <input type="text" placeholder="Patient Name"
+              value={patientName}
+              onChange={(e)=>setPatientName(e.target.value)} required />
 
             <input type="email" placeholder="Email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)} required />
-
-            <input type="date"
-              value={dob}
-              onChange={(e)=>setdob(e.target.value)} required />
-
+            
             <input type="tel" placeholder="Phone Number"
               value={phoneNo}
               onChange={(e)=>setPhoneNo(e.target.value)} required />
 
-            <input type="text" placeholder="Address Line 1"
-              value={addressLine1}
-              onChange={(e)=>setAddressLine1(e.target.value)} required />
+            <input type="date"
+              value={patientDOB}
+              onChange={(e)=>setPatientDOB(e.target.value)} required />
 
-            <input type="text" placeholder="Address Line 2"
-              value={addressLine2}
-              onChange={(e)=>setAddressLine2(e.target.value)} />
+            <input type="text" placeholder="Father's Name"
+              value={fatherName}
+              onChange={(e)=>setFatherName(e.target.value)} required />
+
+            <input type="text" placeholder="Mother's Name"
+              value={motherName}
+              onChange={(e)=>setMotherName(e.target.value)} required />
+
+        
+            <input type="text" placeholder="Permanent Address"
+              value={permanentAddress}
+              onChange={(e)=>setPermanentAddress(e.target.value)} required />
+
+            <input type="text" placeholder="Current Address"
+              value={currentAddress}
+              onChange={(e)=>setCurrentAddress(e.target.value)} />
 
             <input type="password" placeholder="Password"
               value={password}

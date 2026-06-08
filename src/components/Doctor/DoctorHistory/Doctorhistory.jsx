@@ -20,12 +20,12 @@ const Doctorhistory = () => {
       return;
     }
 
-    let url = `http://localhost:8182/bookings/doctor/getAllAppointmentsForDoctor/${userId}`;
-
-    fetch(url)
+    fetch(
+      `http://localhost:8182/bookings/doctor/getAllAppointmentsForDoctor/${userId}`
+    )
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error("No Bookings Found");
         }
         return res.json();
       })
@@ -34,63 +34,146 @@ const Doctorhistory = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setError(err.message);
         setLoading(false);
       });
 
-  }, [role, userId]);
+  }, [userId]);
+
+  const markVisited = async (bookingId) => {
+
+    try {
+
+      const response = await fetch(
+        `http://localhost:8182/bookings/markVisited/${bookingId}`,
+        {
+          method: "PUT",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update status");
+      }
+
+      setBookings((prev) =>
+        prev.map((booking) =>
+          booking.bookingId === bookingId
+            ? { ...booking, status: "VISITED" }
+            : booking
+        )
+      );
+
+      alert("Patient marked as visited");
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to update status");
+    }
+  };
 
   return (
     <div className="doctorhistory">
 
-      {/* Header */}
       <Header />
 
-      {/* Content */}
       <div className="history-container">
+
         <h2>
-          {role === "doctor" ? "Doctor History" : "Patient History"}
+          {role === "doctor"
+            ? "Doctor Appointments"
+            : "Patient History"}
         </h2>
 
-        {/* Loading */}
         {loading && <p>Loading...</p>}
 
-        {/* Error */}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && (
+          <p style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
 
-        {/* Data */}
         {!loading && !error && bookings.length === 0 && (
-          <p>No history found</p>
+          <p>No appointments found</p>
         )}
 
         {!loading && !error && bookings.length > 0 && (
+
           <table>
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>Patient Phone </th>
+                <th>Patient Name</th>
+                <th>Patient Phone</th>
                 <th>Disease</th>
-                <th>Date</th>
+                <th>Appointment Date</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
+
               {bookings.map((b, index) => (
+
                 <tr key={b.bookingId || index}>
+
                   <td>{b.patientName || "N/A"}</td>
+
                   <td>{b.patientPhone || "N/A"}</td>
+
                   <td>{b.disease || "N/A"}</td>
-                  <td>{b.appointmentDate || "N/A"}</td>
+
+                  <td>
+                    {b.appointmentDate
+                      ? new Date(
+                          b.appointmentDate
+                        ).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+
+                  <td>
+                    <span
+                      className={
+                        b.status === "VISITED"
+                          ? "status-visited"
+                          : "status-booked"
+                      }
+                    >
+                      {b.status || "BOOKED"}
+                    </span>
+                  </td>
+
+                  <td>
+                    {b.status === "VISITED" ? (
+                      <span className="status-visited">
+                        Completed
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          markVisited(
+                            b.bookingId
+                          )
+                        }
+                      >
+                        Mark Visited
+                      </button>
+                    )}
+                  </td>
+
                 </tr>
+
               ))}
+
             </tbody>
+
           </table>
+
         )}
+
       </div>
 
-      {/* Footer */}
       <Footer />
+
     </div>
   );
 };

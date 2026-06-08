@@ -1,52 +1,116 @@
-/* =======================
-   Page Container
-======================= */
 .Patienthistory {
-    padding: 15px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f4f7fc;
 }
 
-
-/* =======================
-   Content Section
-======================= */
-
-.content-data {
-    flex: 1;
-    padding: 40px 20px;
+.history-container {
+  width: 92%;
+  max-width: 1300px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.content-data h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #111f42;
+.history-container h2 {
+  text-align: center;
+  color: #0f2557;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
 }
 
-table {
+/* Table Wrapper */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+
+.appointment-table {
+  width: 100%;
   border-collapse: collapse;
-  width: 100%; 
+  min-width: 850px;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 10px; 
-  text-align: left; 
+/* Header */
+
+.appointment-table thead th {
+  background: #2563eb;
+  color: white;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
 }
 
-th {
-  background-color: #f2f2f2;
+/* Body */
+
+.appointment-table tbody tr {
+  transition: 0.3s;
 }
 
+.appointment-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
 
+.appointment-table tbody tr:hover {
+  background: #eef4ff;
+}
 
-/* =======================
-   Footer
-======================= */
+.appointment-table tbody td {
+  padding: 18px;
+  text-align: center;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+}
 
-.end-container {
-    background-color: #111f42;
-    color: #ffffff;
-    margin-top: 40px;
+/* Status */
+
+.status {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.booked {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.visited {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Loading / Error */
+
+.history-container p {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+  .history-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .history-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .appointment-table {
+    min-width: 700px;
+  }
 }

@@ -7,16 +7,16 @@ import Swal from "sweetalert2";
 
 const Appointment = () => {
 
-  const [patientName, setPatientName] = useState("");
-  const [patientDob, setPatientDob] = useState("");
-  const [patientPhone, setPatientPhone] = useState("");
-  const [patientAddress, setPatientAddress] = useState("");
+  // const [patientName, setPatientName] = useState("");
+  // const [patientDob, setPatientDob] = useState("");
+  // const [patientPhone, setPatientPhone] = useState("");
+  // const [patientAddress, setPatientAddress] = useState("");
 
-  const [department, setDepartment] = useState([]);
-  const [selectedDept, setSelectedDept] = useState("");
+  const [departments, setDepartments] = useState([]);
+  const [selectedDepartmentId, setselectedDepartmentId] = useState("");
 
-  const [doctor, setDoctor] = useState([]);
-  const [selectedDoctor, setSelectedDoctor] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const [selectedDoctorId, setSelectedDoctorId] = useState("");
 
   const [disease, setDisease] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
@@ -29,35 +29,38 @@ const Appointment = () => {
   useEffect(() => {
     fetch("http://localhost:8182/departments/getAllDepartments")
       .then(res => res.json())
-      .then(data => setDepartment(data))
+      .then(data => setDepartments(data))
       .catch(err => console.log(err));
   }, []);
 
   // Load doctors based on department
   useEffect(() => {
-    if (selectedDept) {
-      fetch(`http://localhost:8182/doctor/getDoctorByDoctorId/${selectedDept}`)
+    if (selectedDepartmentId) {
+      fetch(`http://localhost:8182/departments/getDoctorByDepartmentId/${selectedDepartmentId}`)
         .then(res => res.json())
-        .then(data => setDoctor(data))
+        .then(data => setDoctors(data))
         .catch(err => console.log(err));
     }
-  }, [selectedDept]);
+  }, [selectedDepartmentId]);
 
   const handleAppointment = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    console.log(localStorage.getItem("patientId"));
 
     try {
       const response = await fetch("http://localhost:8182/bookings/createBooking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          patientName,
-          patientDob,
-          patientPhone,
-          patientAddress,
-          departmentId: Number(selectedDept),
-          doctorId: Number(selectedDoctor),
+          // patientName,
+          // patientDob,
+          // patientPhone,
+          // patientAddress,
+          patientId: localStorage.getItem("patientId"),
+          departmentId: selectedDepartmentId,
+          doctorId: selectedDoctorId,
           disease,
           appointmentDate
         })
@@ -68,19 +71,18 @@ const Appointment = () => {
       if (!response.ok) {
         Swal.fire("Error", result.message, "error");
       } else {
-        const doctorName = doctor.find(d => d.doctorId == selectedDoctor)?.doctorName;
+        const doctorName = doctors.find(d => d.doctorId == selectedDoctorId)?.doctorName;
 
         Swal.fire({
           title: "Appointment Confirmed!",
           html: `
-            <b>Patient:</b> ${patientName} <br/>
             <b>Date:</b> ${appointmentDate} <br/>
             <b>Doctor:</b> ${doctorName}
           `,
           icon: "success",
           confirmButtonText: "View My Bookings"
         }).then(() => {
-          navigate("/history");
+          navigate("/patienthistory");
         });
       }
 
@@ -89,7 +91,7 @@ const Appointment = () => {
     }
 
     setLoading(false);
-  };
+ };
 
   return (
     <div className="appointment-page">
@@ -107,7 +109,7 @@ const Appointment = () => {
 
             <h2>Book Appointment</h2>
 
-            <input type="text" placeholder="Patient Name"
+            {/* <input type="text" placeholder="Patient Name"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)} required />
 
@@ -121,27 +123,27 @@ const Appointment = () => {
 
             <input type="text" placeholder="Address"
               value={patientAddress}
-              onChange={(e) => setPatientAddress(e.target.value)} required />
+              onChange={(e) => setPatientAddress(e.target.value)} required /> */}
 
-            <select value={selectedDept}
+            <select value={selectedDepartmentId}
               onChange={(e) => {
-                setSelectedDept(e.target.value);
-                setSelectedDoctor("");
+                setselectedDepartmentId(e.target.value);
+                setSelectedDoctorId("");
               }} required>
 
               <option value="">Select Department</option>
-              {department.map((dept) => (
+              {departments.map((dept) => (
                 <option key={dept.departmentId} value={dept.departmentId}>
                   {dept.deptName}
                 </option>
               ))}
             </select>
 
-            <select value={selectedDoctor}
-              onChange={(e) => setSelectedDoctor(e.target.value)} required>
+            <select value={selectedDoctorId}
+              onChange={(e) => setSelectedDoctorId(e.target.value)} required>
 
               <option value="">Select Doctor</option>
-              {doctor.map((doc) => (
+              {doctors.map((doc) => (
                 <option key={doc.doctorId} value={doc.doctorId}>
                   {doc.doctorName}
                 </option>

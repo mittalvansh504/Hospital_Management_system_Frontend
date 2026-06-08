@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import Header from '../../Header/Header.jsx'
-import Footer from '../../Footer/Footer.jsx'
-import './patienthistory.css'
+import React, { useState, useEffect } from 'react';
+import Header from '../../Header/Header.jsx';
+import Footer from '../../Footer/Footer.jsx';
+import './patienthistory.css';
 
 const Patienthistory = () => {
 
@@ -13,22 +13,27 @@ const Patienthistory = () => {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
+
     if (!userId) {
       setError("User is not logged in");
       setLoading(false);
       return;
     }
 
-    fetch(`http://localhost:8182/bookings/patient/getAllAppointmentsForPatient/${userId}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to fetch data");
+    fetch(
+      `http://localhost:8182/bookings/patient/getAllAppointmentsForPatient/${userId}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("No Appointment is Booked Yet");
+        }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setBookings(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
@@ -41,47 +46,79 @@ const Patienthistory = () => {
       <Header />
 
       <div className="history-container">
-        <h2>{role === "patient" ? "My Appointments" : "Doctor History"}</h2>
+
+        <h2>
+          {role === "patient"
+            ? "My Appointments"
+            : "Doctor History"}
+        </h2>
 
         {loading && <p>Loading...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
 
-        {!loading && bookings.length === 0 && (
+        {error && (
+          <p style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
+
+        {!loading && !error && bookings.length === 0 && (
           <p>No appointments found</p>
         )}
 
-        {!loading && bookings.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Phone</th>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+        {!loading && !error && bookings.length > 0 && (
 
-            <tbody>
-              {bookings.map((b, index) => (
-                <tr key={b.bookingId || index}>
-                  <td>{b.patientName}</td>
-                  <td>{b.doctorName}</td>
-                  <td>{b.doctorPhone}</td>
-                  <td>
-                    {new Date(b.appointmentDate).toLocaleDateString()}
-                  </td>
-                  <td>{b.status || "Booked"}</td>
+          <div className="table-wrapper">
+            <table className="appointment-table">
+              <thead>
+                <tr>
+                  <th>Patient Name</th>
+                  <th>Doctor Name</th>
+                  <th>Doctor Phone</th>
+                  <th>Appointment Date</th>
+                  <th>Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {bookings.map((b, index) => (
+                  <tr key={b.bookingId || index}>
+
+                    <td>{b.patientName}</td>
+
+                    <td>{b.doctorName}</td>
+
+                    <td>{b.doctorPhone}</td>
+
+                    <td>
+                      {new Date(b.appointmentDate).toLocaleDateString()}
+                    </td>
+
+                    <td>
+                      <span
+                        className={
+                          b.status === "VISITED"
+                            ? "status visited"
+                            : "status booked"
+                        }
+                      >
+                        {b.status}
+                      </span>
+                    </td>
+
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
         )}
+
       </div>
 
       <Footer />
+
     </div>
-  )
-}
+  );
+};
 
 export default Patienthistory;
