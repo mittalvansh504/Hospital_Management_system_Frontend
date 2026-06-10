@@ -21,7 +21,7 @@ const Patienthistory = () => {
     }
 
     fetch(
-      `https://hospitalbackend-f2ja.onrender.com/bookings/patient/getAllAppointmentsForPatient/${userId}`
+      `https://hospitalbackend-ot2y.onrender.com/bookings/patient/getAllAppointmentsForPatient/${userId}`
     )
       .then((res) => {
         if (!res.ok) {

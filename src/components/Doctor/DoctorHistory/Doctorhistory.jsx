@@ -21,7 +21,7 @@ const Doctorhistory = () => {
     }
 
     fetch(
-      `https://hospitalbackend-f2ja.onrender.com/bookings/doctor/getAllAppointmentsForDoctor/${userId}`
+      `https://hospitalbackend-ot2y.onrender.com/bookings/doctor/getAllAppointmentsForDoctor/${userId}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -45,7 +45,7 @@ const Doctorhistory = () => {
     try {
 
       const response = await fetch(
-        `https://hospitalbackend-f2ja.onrender.com/bookings/markVisited/${bookingId}`,
+        `https://hospitalbackend-ot2y.onrender.com/bookings/markVisited/${bookingId}`,
         {
           method: "PUT",
         }

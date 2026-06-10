@@ -27,7 +27,7 @@ const Appointment = () => {
 
   // Load departments
   useEffect(() => {
-    fetch("https://hospitalbackend-f2ja.onrender.com/departments/getAllDepartments")
+    fetch("https://hospitalbackend-ot2y.onrender.com/departments/getAllDepartments")
       .then(res => res.json())
       .then(data => setDepartments(data))
       .catch(err => console.log(err));
@@ -36,7 +36,7 @@ const Appointment = () => {
   // Load doctors based on department
   useEffect(() => {
     if (selectedDepartmentId) {
-      fetch(`https://hospitalbackend-f2ja.onrender.com/departments/getDoctorByDepartmentId/${selectedDepartmentId}`)
+      fetch(`https://hospitalbackend-ot2y.onrender.com/departments/getDoctorByDepartmentId/${selectedDepartmentId}`)
         .then(res => res.json())
         .then(data => setDoctors(data))
         .catch(err => console.log(err));
@@ -50,7 +50,7 @@ const Appointment = () => {
     console.log(localStorage.getItem("patientId"));
 
     try {
-      const response = await fetch("https://hospitalbackend-f2ja.onrender.com/bookings/createBooking", {
+      const response = await fetch("https://hospitalbackend-ot2y.onrender.com/bookings/createBooking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

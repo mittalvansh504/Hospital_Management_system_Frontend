@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://hospitalbackend-f2ja.onrender.com/doctor/loginDoctor", {
+      const response = await fetch("https://hospitalbackend-ot2y.onrender.com/doctor/loginDoctor", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
