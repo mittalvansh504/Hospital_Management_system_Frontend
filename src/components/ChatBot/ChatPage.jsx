@@ -59,7 +59,7 @@ const ChatPage = () => {
     try {
 
       const res = await fetch(
-        "https://hospitalbackend-f2ja.onrender.com/chatGpt/api/version4/chat/chatWithGpt",
+        "https://hospitalbackend-ot2y.onrender.com/chatGpt/api/version4/chat/chatWithGpt",
         {
           method: "POST",
           headers: {

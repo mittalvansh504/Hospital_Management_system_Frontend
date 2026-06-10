@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://hospitalbackend-f2ja.onrender.com/patient/loginPatient", {
+      const response = await fetch("https://hospitalbackend-ot2y.onrender.com/patient/loginPatient", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
