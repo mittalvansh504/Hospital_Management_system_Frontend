@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./image.css";
 
-
 const Image = () => {
-
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState(null);
-
 
    useEffect(() => {
       const syncAuth = () => {
@@ -20,7 +17,6 @@ const Image = () => {
   
       return () => window.removeEventListener("storage", syncAuth);
     }, []);
-
 
 
   const navigate = () => {
